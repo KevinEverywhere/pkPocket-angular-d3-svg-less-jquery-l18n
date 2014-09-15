@@ -1,0 +1,27 @@
+<div ng-controller="WeatherCtrl" id="weather"  class="tempClass weather">
+	<div ng-show="country!=''" class="skiptranslate">
+		<div ng-show="weather!=''" class="tempClassInner">
+			{{'locale' | i18nObj:'_WeatherFrag1_'}}
+				{{city}}, 
+				{{country}}
+			{{'locale' | i18nObj:'_WeatherFrag2_'}}
+				{{observation_time}}
+			{{'locale' | i18nObj:'_WeatherFrag3_'}}
+				{{weather}},
+			{{'locale' | i18nObj:'_with_'}}
+				{{relative_humidity}}, 
+			{{'locale' | i18nObj:'_and_'}} 
+				{{tempC}}
+			{{'locale' | i18nObj:'_degC_'}}.
+		</div>
+		<div ng-show="weather==''" class="tempClassInner">
+			{{'locale' | i18nObj:'_WeatherFrag1_'}}
+				{{city}}, 
+				{{country}}
+			{{'locale' | i18nObj:'_WeatherNA_'}}
+		</div>
+	</div>
+	<div ng-show="country==''" class="skiptranslate tempClassInner">
+		{{'locale' | i18nObj:'_WeatherTemp_'}}
+	</div>
+</div>

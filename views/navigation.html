@@ -1,0 +1,9 @@
+<div ng-controller="NavigationCtrl" class="nav">
+  <ul>
+	<li><a class="_nav" ng-class="{active: $state.includes('home')}" ui-sref="home">{{'locale' | i18nObj:'_Home_'}}</a></li>
+	<li><a class="_nav" ng-class="{active: $state.includes('country')}" ui-sref="country">{{'locale' | i18nObj:'_Country_'}}</a></li>
+	<li><a class="_nav" ng-class="{active: $state.includes('world')}" ui-sref="world">{{'locale' | i18nObj:'_World_'}}</a></li>
+	<li><a class="_nav" ng-class="{active: $state.includes('contact')}" ui-sref="contact">{{'locale' | i18nObj:'_Contact_'}}</a></li>
+  </ul>
+
+</div>

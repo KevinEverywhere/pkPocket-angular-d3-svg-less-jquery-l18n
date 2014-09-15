@@ -1,0 +1,149 @@
+[{
+	"key":"_MainDescription_",
+	"value":"Click on the world map or enter a country name to find information about it.",
+	"description":"Main description"
+},{
+	"key":"_MainHead_",
+	"value":"Planet Kevin",
+	"description":"Main heading"
+},{
+	"key":"_Home_",
+	"value":"Home",
+	"description":"home"
+},{
+	"key":"_World_",
+	"value":"World",
+	"description":"world"
+},{
+	"key":"_WorldDesc_",
+	"value":"GMap v3 API integrated into AngularJS.",
+	"description":"World map description"
+},{
+	"key":"_CountryInfo_",
+	"value":"Select a country.",
+	"description":"Country toggle "
+},{
+	"key":"_CountryToggle_",
+	"value":"Country Map",
+	"description":"Country toggle "
+},{
+	"key":"_TravelTemp_",
+	"value":"This is a placeholder for a travel service.",
+	"description":"travel temp "
+},{
+	"key":"_TravelToggle_",
+	"value":"Travel",
+	"description":"Travel toggle"
+},{
+	"key":"_WeatherFrag1_",
+	"value":"Weather for",
+	"description":"Weather temp"
+},{
+	"key":"_WeatherFrag2_",
+	"value":"was observed at",
+	"description":"Weather temp"
+},{
+	"key":"_WeatherFrag3_",
+	"value":"The current conditions are",
+	"description":"Weather temp "
+},{
+	"key":"_WeatherFrag4_",
+	"value":"relative humidity",
+	"description":"relative humidity"
+},{
+	"key":"_WeatherNA_",
+	"value":"was unavailable",
+	"description":"Weather NA"
+},{
+	"key":"_with_",
+	"value":"with",
+	"description":"common word-with"
+},{
+	"key":"_and_",
+	"value":"and",
+	"description":"common word-and"
+},{
+	"key":"_degC_",
+	"value":"degrees celsius",
+	"description":"common word-celsius"
+},{
+	"key":"_WeatherTemp_",
+	"value":"Due to quota limit, weather is disabled.",
+	"description":"Weather temp "
+},{
+	"key":"_WeatherToggle_",
+	"value":"Weather",
+	"description":"Weather toggle "
+},{
+	"key":"_CurrencyHeading_",
+	"value":"Please enter the currencies you wish to convert.",
+	"description":"currency heading"
+},{
+	"key":"_WikipediaToggle_",
+	"value":"Wikipedia",
+	"description":"Wikipedia toggle "
+},{
+	"key":"_WikipediaTemp_",
+	"value":"This is a placeholder for Wikipedia.",
+	"description":"travel temp "
+},{
+	"key":"_CurrencyToggle_",
+	"value":"Exchange Rate",
+	"description":"Exchange toggle "
+},{
+	"key":"_CurrencyTemp_",
+	"value":"Choose a country to see its exchange rate.",
+	"description":"currency heading"
+},{
+	"key":"_Country_",
+	"value":"Country",
+	"description":"Country"
+},{
+	"key":"_Contact_",
+	"value":"Contact",
+	"description":"Contact"
+},{
+	"key":"_NavHead_",
+	"value":"Click or Swipe",
+	"description":"Greeting"
+},{
+	"key":"_NavPlaceHolder_",
+	"value":"Select and type...",
+	"description":"Text input instructions"
+},{
+	"key":"_NavHelp_",
+	"value":"Enter country name:",
+	"description":"Navigation instructions"
+},{
+	"key":"_Loading_",
+	"value":"Page Content Loading...",
+	"description":"Loading text"
+},{
+	"key":"_NoWork_",
+	"value":"Your device and browser combination is not supported.",
+	"description":"Loading text"
+},{
+	"key":"_ShowWorld_",
+	"value":"Show World",
+	"description":"Show world."
+},{
+	"key":"_HideWorld_",
+	"value":"Hide World",
+	"description":"Hide world."
+},{
+	"key":"_AboutToggle_",
+	"value":"About this app",
+	"description":"App description."
+},{
+	"key":"_AboutPlaceHolder_",
+	"value":"PlanetKevin Pocket Edition is a JavaScript application written by Kevin Ready.",
+	"description":"Navigation instructions"
+},{
+	"key":"_NavTail_",
+	"value":"Kevin",
+	"description":"Navigation instructions"
+},{
+	"key":"_Footer_",
+	"value":"planet kevin, by kevin ready",
+	"description":"my very own tagline"
+}]

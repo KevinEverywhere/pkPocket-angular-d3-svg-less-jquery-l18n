@@ -28,12 +28,6 @@ html,body{
 	margin:0px;
 }
 
-span, input{
-	font:@MidFONT;
-}
-input{
-	width:50%;
-}
 .heading{
 	font:@BigFONT;
 }
@@ -468,41 +462,47 @@ div.padded{
 	#main{
 		#bareBones > .main;
 	}
-
+}
+span, input{
+	font:@MidFONT;
+}
+input{
+	width:50%;
 }
 
-	ul{
-		list-style-type:none;
-		padding: 0;
-		cursor:pointer;
-		width:device-width;
-		overflow:hidden;
-	}
-	li{
-		line-height:2em;
-		width:device-width;
-		overflow:hidden;
-	}
-	li a{
-		line-height:2em;
-		font:@BigFONT;
-		color:@linkColor;
-		display:block;
-		background-color:@lightRed;
-		width:device-width;
-		height:100%;
-		padding:5px;
-	}
-	li a.active{
-		line-height:2em;
-		font:@BigFONT;
-		#bareBones > .active;
-		display:block;
-		background-color:@lightCyan;
-		width:device-width;
-		height:100%;
-		padding:5px;
-	}
+
+ul{
+	list-style-type:none;
+	padding: 0;
+	cursor:pointer;
+	width:device-width;
+	overflow:hidden;
+}
+li{
+	line-height:2em;
+	width:device-width;
+	overflow:hidden;
+}
+li a{
+	line-height:2em;
+	font:@BigFONT;
+	color:@linkColor;
+	display:block;
+	background-color:@lightRed;
+	width:device-width;
+	height:100%;
+	padding:5px;
+}
+li a.active{
+	line-height:2em;
+	font:@BigFONT;
+	#bareBones > .active;
+	display:block;
+	background-color:@lightCyan;
+	width:device-width;
+	height:100%;
+	padding:5px;
+}
 
 #bareBones{
 	.cover{

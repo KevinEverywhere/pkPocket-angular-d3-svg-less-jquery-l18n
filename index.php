@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-<head><title>Planet Kevin Pocket Edition</title>
+<head><title>PK Pocket Edition Loading...</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Preloader">
@@ -15,6 +15,7 @@
     user to index2.php, the actual home page. If not available, it
     preloads these two heavy assets, and then forwards the user to 
     the actual home page.
+
 
 -->
         <style type="text/css">

@@ -14,9 +14,9 @@
 @linkColor:multiply(@foreColor,#ebb); 
 @activeColor:multiply(@foreColor,#373); 
 @visitedColor:#eee;
-@FONT:.75em Arial,sans-serif;
-@MidFONT:1.125em Arial,sans-serif;
-@BigFONT:1.5em Arial,sans-serif;
+@FONT:.75em Helvetica Neue Interface m3, Arial,sans-serif;
+@MidFONT:1.0625em Helvetica Neue Interface m3, Arial,sans-serif;
+@BigFONT:1.25em Helvetica Neue Interface m3, Arial,sans-serif;
 
 #countryName{
 	float:right;
@@ -111,7 +111,7 @@ div.padded{
 	position:absolute;
 	text-align:center;
 	top:0em;
-	padding:8em 3em;
+	padding:8em 2.75em;
 	line-height:10em;
 	left:0em;
 	right:0em;
@@ -190,7 +190,7 @@ div.padded{
 		-webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 		transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 		color: @bgColor;
-		height:3em;
+		height:2.75em;
 		display:block;
 		z-index:100000;
 	}
@@ -209,7 +209,7 @@ div.padded{
 		position:relative;
 		float:left;
 		width:@_HalfW;
-		height:2.5em;
+		height:2.75em;
 		font:@BigFONT;
 		vertical-align:center;
 		padding:0em .5em;
@@ -221,7 +221,7 @@ div.padded{
 	.expanded{
 		position:relative;
 		float:left;
-	    height:12.5em;
+	    height:12.25em;
 	    -webkit-animation: expand .25s;
 	}
 	.collapsable{
@@ -245,7 +245,7 @@ div.padded{
 		position:relative;
 		float:left;
 		width:100%;
-		height:2.5em;
+		height:2.75em;
 	    -webkit-animation: collapse .25s;
 		overflow:hidden;
 	}
@@ -355,7 +355,7 @@ div.padded{
 		
 	.collapsed{
 		width:100%;
-		height:2.5em;
+		height:2.75em;
 	    -webkit-animation: collapse .25s;
 		overflow:hidden;
 	}
@@ -395,7 +395,7 @@ div.padded{
 	}
 
 	.collapsable{
-		height:12.5em;
+		height:12.25em;
 		width:@_SmallW;
 		float:left;
 		font:@FONT;
@@ -437,7 +437,7 @@ div.padded{
 		position:relative;
 		float:left;
 		width:@_SmallW;
-		height:2.5em;
+		height:2.75em;
 		font:@BigFONT;
 		vertical-align:center;
 		padding:0em .5em;
@@ -516,8 +516,8 @@ li a.active{
 		margin: 0em;
 		padding: .125em 0em 0em;
 		position:absolute; 
-		bottom:3em;
-		top:3em;
+		bottom:2.75em;
+		top:2.75em;
 		right:0em;
 		left:0em;
 		overflow-x:hidden;
@@ -537,7 +537,7 @@ li a.active{
 		-webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 		transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 		color: @bgColor;
-		height:3em;
+		height:2.75em;
 		width:@_SmallW;
 		display:block;
 		z-index:100000;
@@ -651,7 +651,7 @@ a{
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
-  line-height: 2.5em;
+  line-height: 2.75em;
   padding-bottom: 1.1875em;
 }
 

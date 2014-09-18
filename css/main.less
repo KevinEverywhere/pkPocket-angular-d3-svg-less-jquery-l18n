@@ -14,9 +14,13 @@
 @linkColor:multiply(@foreColor,#ebb); 
 @activeColor:multiply(@foreColor,#373); 
 @visitedColor:#eee;
-@FONT:.75em Helvetica Neue Interface m3, Arial,sans-serif;
-@MidFONT:1.0625em Helvetica Neue Interface m3, Arial,sans-serif;
-@BigFONT:1.25em Helvetica Neue Interface m3, Arial,sans-serif;
+@FONT:.75em @userFont;
+@MidFONT:1.0625em @userFont;
+@BigFONT:1.25em @userFont;
+
+/*
+font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+*/
 
 #countryName{
 	float:right;

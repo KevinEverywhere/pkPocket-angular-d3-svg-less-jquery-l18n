@@ -1,0 +1,9 @@
+CACHE MANIFEST
+# v1 - 2014-09-20
+# In addition to these files, the SVG and countryJSONObj.php are
+# stored by localStorage mechanism. The combination of manifest 
+# and localStorage enables fast-loading and offline functionality
+# for mobile and desktop Web content. 
+# By Kevin Ready, kevin@planetkevin.com
+index2.php
+assets/yinYang.php

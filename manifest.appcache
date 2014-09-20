@@ -1,0 +1,51 @@
+CACHE MANIFEST
+# v002 - 2014-09-20
+# In addition to these files, the SVG and countryJSONObj.php are
+# stored by localStorage mechanism. The combination of manifest 
+# and localStorage enables fast-loading and offline functionality
+# for mobile and desktop Web content. 
+# By Kevin Ready, kevin@planetkevin.com
+css/main.less
+js/masterMapApp.js
+js/controllers/adController.js
+js/controllers/bodyController.js
+js/controllers/contactController.js
+js/controllers/currencyController.js
+js/controllers/footerController.js
+js/controllers/keyController.js
+js/controllers/mainController.js
+js/controllers/navigationController.js
+js/controllers/svgController.js
+js/controllers/travelController.js
+js/controllers/weatherController.js
+js/controllers/wikipediaController.js
+js/i18n/locale_en.json
+js/libs/angular.js
+js/libs/d3.v3.min.js
+js/libs/jquery-1.9.1.min.js
+js/libs/jquery.min.map
+js/libs/less-1.7.0.min.js
+js/libs/lodash.underscore.js
+js/modules/angular-animate.js
+js/modules/angular-route.js
+js/modules/angular-ui-router.js
+js/modules/d3_module.js
+js/modules/il8nObj_module.js
+js/modules/less_ng_module.js
+js/modules/local_crud_module.js
+js/modules/map_module.js
+js/modules/weather_module.js
+views/adView.html
+views/contact.html
+views/currencyView.html
+views/footer.html
+views/google-map.html
+views/google-world-map.html
+views/main.html
+views/navigation.html
+views/svg-map.html
+views/travelView.html
+views/weatherView.html
+views/whereAmI.html
+views/wikipediaView.html
+

@@ -1,9 +1,10 @@
 <!doctype html>
 <html ng-app='masterMapApp'>
 <head><title>Planet Kevin Pocket Edition</title>
+<link rel="dns-prefetch" href="//www.planetkevin.com">
+<link rel="prefetch" href="//www.planetkevin.com">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="">
 <meta name="keywords" content="Angular -> SVG -> D3 -> JQuery -> Google Map v3 -> Less -> AJAX -> JavaScript -> HTML">
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -23,7 +24,24 @@
     The resizing and orientation events affect the Less global variables, so
     all of its business logic is included together in this script element.
 */
-var svgW=1080, svgH=460, bigW, smallW, halfW, thirdW, scaleW, scaleH, padding=10;
+var svgW=1080, svgH=460, bigW, smallW, halfW, thirdW, scaleW, scaleH, padding=10,
+userAgent=navigator.userAgent,uaFont="";
+
+if(userAgent.toLowerCase().indexOf("chrome")!=-1){
+    uaFont="Roboto";
+}else{
+    if(userAgent.toLowerCase().indexOf("firefox")!=-1){
+        uaFont='"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue"';
+    }else if(userAgent.toLowerCase().indexOf("firefox")!=-1){
+        uaFont='"Helvetica Neue Interface m3"';
+    }
+}
+
+if (uaFont.length>0) {
+    uaFont+= ", ";
+}
+
+uaFont+="Arial, sans-serif";
 
 function changeOrient(evt){
     getCurrentDimensions();
@@ -36,7 +54,8 @@ function changeOrient(evt){
         "@QtrW":((bigW / 4)  * scaleW) + "px",
         "@_BigH":(svgHeight(bigW)-padding * scaleW) + "px",
         "@_SmallH":(svgHeight(smallW)-padding * scaleW) + "px",
-        "@_HalfH":(smallW * scaleW) + "px"
+        "@_HalfH":(smallW * scaleW) + "px",
+        "@userFont":uaFont
     });
     console.log("$window.changeOrient");
 }    
@@ -79,7 +98,8 @@ less = {
         QtrW:((bigW / 4)  * scaleW) + "px",
         _BigH:(svgHeight(bigW)-padding * scaleW) + "px",
         _SmallH:(svgHeight(smallW)-padding * scaleW) + "px",
-        _HalfH:(smallW * scaleW) + "px"
+        _HalfH:(smallW * scaleW) + "px",
+        userFont:uaFont
     },
     dumpLineNumbers: "comments",
     relativeUrls: false,
@@ -146,7 +166,7 @@ body{
                 </div>
             </div>
             <div id="secondGroup">
-                <div id="weatherHolder" class="holder {{$rootScope.weatherToggle==true ? 'expanded' : 'collapsed'}}">
+                <div id="weatherHolder" ng-init="$rootScope.weatherToggle=false" class="holder {{$rootScope.weatherToggle==true ? 'expanded' : 'collapsed'}}">
                     <div class="toggler" ng-click="$rootScope.weatherToggle=!$rootScope.weatherToggle" id="weatherHeader">{{'locale' | i18nObj:'_WeatherToggle_'}}</div>
                     <div class="collapsable" ng-show="$rootScope.weatherToggle==true" id="weatherView" ng-include src="'views/weatherView.html'"></div>
                 </div>

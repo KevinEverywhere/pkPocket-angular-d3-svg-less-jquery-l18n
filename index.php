@@ -27,7 +27,7 @@
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
-                font: 700 small-caps 1.2em arial;
+                font: 400 1.2em "Segoe UI", "Roboto", "Helvetica Neue Interface m3", Arial, sans-serif;
                 color:  #700;
             }
 

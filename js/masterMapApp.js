@@ -33,10 +33,24 @@ var masterMapApp=angular.module("masterMapApp",  [
 		$rootScope.hasOpened=true;
 		$rootScope.interstitialized={done:false};
 		var redraw=function () {
+			console.log('redraw')
 			D3Service.testScaling();
 		};
+		var updateOnlineStatus=function(event){
+			console.log("masterMapApp.updateOnlineStatus");
+			$rootScope.$broadcast("onlineStatusUpdate");
+		}
 		$window.addEventListener('orientationchange', redraw, false);
 		$window.addEventListener('resize', redraw, false);
+		$window.addEventListener('online', function(e) {
+			console.log("masterMapApp.updateOnlineStatus");
+			$rootScope.$broadcast("onlineStatusUpdate");
+		}, false);
+		$window.addEventListener('offline',function(e) {
+			console.log("masterMapApp.updateOnFFlineStatus");
+			$rootScope.$broadcast("onlineStatusUpdate");
+		}, false);
+
 	})
 	.config(function($stateProvider, $urlRouterProvider) {
 		$urlRouterProvider.otherwise('/');

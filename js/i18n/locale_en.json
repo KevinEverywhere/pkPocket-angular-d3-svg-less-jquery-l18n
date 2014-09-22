@@ -27,6 +27,10 @@
 	"value":"Country Map",
 	"description":"Country toggle "
 },{
+	"key":"_TranslationOffline_",
+	"value":"The translation service is not available in offline mode.",
+	"description":"Offline message for translation."
+},{
 	"key":"_TravelTemp_",
 	"value":"This is a placeholder for a travel service.",
 	"description":"travel temp "

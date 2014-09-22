@@ -1,7 +1,9 @@
 <!doctype html>
-<html>
+<html manifest="small.manifest.appcache">
 <head><title>PK Pocket Edition Loading...</title>
 <meta charset="utf-8">
+<link rel="dns-prefetch" href="//www.planetkevin.com">
+<!--link rel="prefetch" href="//www.planetkevin.com" -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Preloader">
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -33,7 +35,7 @@
 
             @media screen and (min-width: 720px){
                 div{
-                    font: 700 small-caps 1.6em arial;
+                    font: 700 1.6em "Segoe UI", "Roboto", "Helvetica Neue Interface m3", Arial, sans-serif;
                 }
             }
 

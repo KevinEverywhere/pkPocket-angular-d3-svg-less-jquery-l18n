@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app='masterMapApp'>
+<html>
 <head><title>Planet Kevin Pocket Edition</title>
 <link rel="dns-prefetch" href="//www.planetkevin.com">
 <link rel="prefetch" href="//www.planetkevin.com">
@@ -142,78 +142,92 @@ body{
 <script src="js/modules/weather_module.js"></script>
 
 </head>
-    <body ng-controller="BodyController" ng-init="$rootScope.svgToggle=true">
-        <div ui-view="main" id="main" class="padded"></div>
-        <div ng-show="isLoaded==true" id="container" class="container">
-            <div id="firstGroup">
-                <div id="svgMap" ng-show="$rootScope.svgToggle==true" ng-include src="'views/svg-map.html'"></div>
-                <div id="countryMapHolder" ng-init="countryToggle=true" class="holder {{countryToggle==true ? 'expanded' : 'collapsed'}}">
-                    <div class="toggler" class='countryMap' id="googleMapHeader">
-                        <span ng-click="countryToggle=!countryToggle">
-                            {{'locale' | i18nObj:'_CountryToggle_'}}
-                        </span>
-                        <span class="smallSpan" ng-show="$rootScope.svgToggle==false" ng-click="$rootScope.svgToggle=!$rootScope.svgToggle">
-                            {{'locale' | i18nObj:'_ShowWorld_'}}
-                        </span>
-                        <span class="smallSpan" ng-show="$rootScope.svgToggle==true" ng-click="$rootScope.svgToggle=!$rootScope.svgToggle">
-                            {{'locale' | i18nObj:'_HideWorld_'}}
-                        </span>
+    <body>
+        <div id="masterMapApp" class="fullSize">
+            <div ng-controller="BodyController" ng-init="$rootScope.svgToggle=true" class="fullSize">
+                <div ui-view="main" id="main" class="padded"></div>
+                <div ng-show="isLoaded==true" id="container" class="container">
+                    <div id="firstGroup">
+                        <div id="svgMap" ng-show="$rootScope.svgToggle==true" ng-include src="'views/svg-map.html'"></div>
+                        <div id="countryMapHolder" ng-init="countryToggle=true" class="holder {{countryToggle==true ? 'expanded' : 'collapsed'}}">
+                            <div class="toggler" class='countryMap' id="googleMapHeader">
+                                <span ng-click="countryToggle=!countryToggle">
+                                    {{'locale' | i18nObj:'_CountryToggle_'}}
+                                </span>
+                                <span class="smallSpan" ng-show="$rootScope.svgToggle==false" ng-click="$rootScope.svgToggle=!$rootScope.svgToggle">
+                                    {{'locale' | i18nObj:'_ShowWorld_'}}
+                                </span>
+                                <span class="smallSpan" ng-show="$rootScope.svgToggle==true" ng-click="$rootScope.svgToggle=!$rootScope.svgToggle">
+                                    {{'locale' | i18nObj:'_HideWorld_'}}
+                                </span>
+                            </div>
+                            <div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? '' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
+                            <!-- div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? 'tempClass' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
+                            <div class="{{$rootScope.svgToggle==true ? 'tempClass' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
+                            <div class="{{countrySelected==true ? '' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div -->
+                        </div>
                     </div>
-                    <div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? '' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                    <!-- div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? 'tempClass' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                    <div class="{{$rootScope.svgToggle==true ? 'tempClass' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                    <div class="{{countrySelected==true ? '' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div -->
+                    <div id="secondGroup">
+                        <div id="weatherHolder" ng-init="$rootScope.weatherToggle=false" class="holder {{$rootScope.weatherToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="$rootScope.weatherToggle=!$rootScope.weatherToggle" id="weatherHeader">{{'locale' | i18nObj:'_WeatherToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="$rootScope.weatherToggle==true" id="weatherView" ng-include src="'views/weatherView.html'"></div>
+                        </div>
+                        <div id="travelHolder" class="holder {{travelToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="travelToggle=!travelToggle" id="travelHeader">{{'locale' | i18nObj:'_TravelToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="travelToggle==true" id="travelView" ng-include src="'views/travelView.html'"></div>
+                        </div>
+                        <div id="wikipediaHolder" class="holder {{wikipediaToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="wikipediaToggle=!wikipediaToggle" id="wikipediaHeader">{{'locale' | i18nObj:'_WikipediaToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="wikipediaToggle==true" id="wikipediaView" ng-include src="'views/wikipediaView.html'"></div>
+                        </div>
+                        <div id="currencyHolder" class="holder {{currencyToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="currencyToggle=!currencyToggle" id="currencyHeader">{{'locale' | i18nObj:'_CurrencyToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="currencyToggle==true" id="currencyView" ng-include src="'views/currencyView.html'"></div>
+                        </div>
+                        <div ng-init="adToggle=true" id="adHolder" class="holder {{adToggle==true ? 'expanded' : 'collapsed'}}">
+                            <div class="toggler" ng-click="adToggle=!adToggle" id="adHeader">{{'locale' | i18nObj:'_AboutToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="adToggle==true" id="adView" ng-include src="'views/adView.html'"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div id="secondGroup">
-                <div id="weatherHolder" ng-init="$rootScope.weatherToggle=false" class="holder {{$rootScope.weatherToggle==true ? 'expanded' : 'collapsed'}}">
-                    <div class="toggler" ng-click="$rootScope.weatherToggle=!$rootScope.weatherToggle" id="weatherHeader">{{'locale' | i18nObj:'_WeatherToggle_'}}</div>
-                    <div class="collapsable" ng-show="$rootScope.weatherToggle==true" id="weatherView" ng-include src="'views/weatherView.html'"></div>
-                </div>
-                <div id="travelHolder" class="holder {{travelToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                    <div class="toggler" ng-click="travelToggle=!travelToggle" id="travelHeader">{{'locale' | i18nObj:'_TravelToggle_'}}</div>
-                    <div class="collapsableSmall" ng-show="travelToggle==true" id="travelView" ng-include src="'views/travelView.html'"></div>
-                </div>
-                <div id="wikipediaHolder" class="holder {{wikipediaToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                    <div class="toggler" ng-click="wikipediaToggle=!wikipediaToggle" id="wikipediaHeader">{{'locale' | i18nObj:'_WikipediaToggle_'}}</div>
-                    <div class="collapsableSmall" ng-show="wikipediaToggle==true" id="wikipediaView" ng-include src="'views/wikipediaView.html'"></div>
-                </div>
-                <div id="currencyHolder" class="holder {{currencyToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                    <div class="toggler" ng-click="currencyToggle=!currencyToggle" id="currencyHeader">{{'locale' | i18nObj:'_CurrencyToggle_'}}</div>
-                    <div class="collapsableSmall" ng-show="currencyToggle==true" id="currencyView" ng-include src="'views/currencyView.html'"></div>
-                </div>
-                <div ng-init="adToggle=true" id="adHolder" class="holder {{adToggle==true ? 'expanded' : 'collapsed'}}">
-                    <div class="toggler" ng-click="adToggle=!adToggle" id="adHeader">{{'locale' | i18nObj:'_AboutToggle_'}}</div>
-                    <div class="collapsableSmall" ng-show="adToggle==true" id="adView" ng-include src="'views/adView.html'"></div>
-                </div>
+                <div id="pageBottom" class="pageBottom">
+                    <div class="rightFloater">{{'locale' | i18nObj:'_Footer_'}}</div>
+                    <div class="leftFloater">
+                        <div id="translateHolder" ng-include src="'views/translateView.html'"></div>
+                    </div>
+                    </div>
+                <div ng-show="isLoaded==false" id="interstitial">{{'locale' | i18nObj:'_Loading_'}}</div>
+                <div id="doesnotWork">{{'locale' | i18nObj:'_NoWork_'}}</div>
             </div>
         </div>
-        <div id="pageBottom" class="pageBottom">
-            <div class="rightFloater">{{'locale' | i18nObj:'_Footer_'}}</div>
-            <div class="leftFloater">
-<div id="google_translate_element"></div><script type="text/javascript">
-
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL, multilanguagePage: true}, 'google_translate_element');
-}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            </div>
-            </div>
-        <div ng-show="isLoaded==false" id="interstitial">{{'locale' | i18nObj:'_Loading_'}}</div>
-        <div id="doesnotWork">{{'locale' | i18nObj:'_NoWork_'}}</div>
         <script src='js/masterMapApp.js'></script>
-        <script src="js/controllers/keyController.js"></script>
-        <script src="js/controllers/mainController.js"></script>
-        <script src="js/controllers/footerController.js"></script>
-        <script src="js/controllers/contactController.js"></script>
-        <script src="js/controllers/navigationController.js"></script>
-        <script src="js/controllers/travelController.js"></script>
-        <script src="js/controllers/weatherController.js"></script>
-        <script src="js/controllers/wikipediaController.js"></script>
-        <script src="js/controllers/currencyController.js"></script>
-        <script src="js/controllers/bodyController.js"></script>
-        <script src="js/controllers/svgController.js"></script>
-        <script src="js/controllers/worldMapController.js"></script>
-        <script src="js/controllers/adController.js"></script>
+        <script type="text/javascript">$(document).ready(function (){
+            var controllers=[
+                "body",
+                "key",
+                "main",
+                "footer",
+                "contact",
+                "navigation",
+                "travel",
+                "translate",
+                "weather",
+                "wikipedia",
+                "currency",
+                "svg",
+                "ad"
+            ];
+            var _script;
+            $.each( controllers, function( index, value ){
+                _script = document.createElement( "script" );
+                _script.type = "text/javascript";
+                _script.src = "js/controllers/" + value + "Controller.js";
+                $("body").append(_script);
+                console.log(value + " loaded");
+            });
+            angular.element(document).ready(function() {
+                angular.bootstrap(document, ['masterMapApp']);
+            });
+        });</script>
     </body>
 </html>

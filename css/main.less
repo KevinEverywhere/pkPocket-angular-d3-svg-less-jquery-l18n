@@ -17,15 +17,198 @@
 @FONT:.75em @userFont;
 @MidFONT:1.0625em @userFont;
 @BigFONT:1.25em @userFont;
+@HugeFONT:2.25em @userFont;
+
+
+#introDivHolder{
+	position: absolute;
+	top: 0em;
+	left: 0em;
+	right: 0em;
+	bottom: 0em;
+	height:device-height;
+	width:device-width;
+	text-align: center;
+	margin:0px;
+}
+.introDiv{
+    text-align: center;
+    margin: auto;
+    padding: 1em;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font: 400 @BigFONT;
+    color:  #700;
+}
+
+@media screen and (min-width: 720px){
+    .introDiv{
+        font: 700 @HugeFONT;
+    }
+}
+
+.fromZero{
+    position: absolute;
+    left: 0em;
+    top: 8em;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+.loader{
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    right: 0em;
+    bottom: 0em;
+    z-index: 987654321;
+    width: 100%;
+    height: 100%;
+    background-color:#fff;
+}
+.yinYang{
+    position: absolute;
+    top: -2.0em;
+    left: 0em;
+    right: 0em;
+    background-image:  url(../assets/yinYang.png);
+    width: 360px;
+    height: 360px;
+    margin: auto;
+    padding: 0em;
+    fill: #000;
+    color: #000;
+    transform:scale(.1);
+}
+.animCircleInf{
+    -webkit-animation: animCircle 1.5s linear 0s 9;
+    -moz-animation:    animCircle 1.5s linear 0s 9;
+    -o-animation:      animCircle 1.5s linear 0s 9;
+    animation:         animCircle 1.5s linear 0s 9;
+}
+@-webkit-keyframes animCircle{
+   0%   {-webkit-transform: rotate( 0deg) scale(.2);}
+  25%  {-webkit-transform: rotate( 90deg) scale(.225);}
+  50%  {-webkit-transform: rotate( 180deg) scale(.25);}
+  75%  {-webkit-transform: rotate( 270deg) scale(.225);}
+  100% {-webkit-transform: rotate( 360deg) scale(.2);}
+}
+@-moz-keyframes animCircle{
+   0%   {transform: rotate( 0deg) scale(.2);}
+  25%  {transform: rotate( 90deg) scale(.225);}
+  50%  {transform: rotate( 180deg) scale(.25);}
+  75%  {transform: rotate( 270deg) scale(.225);}
+  100% {transform: rotate( 360deg) scale(.2);}
+}
+@-o-keyframes animCircle{
+   0%   {transform: rotate( 0deg) scale(.2);}
+  25%  {transform: rotate( 90deg) scale(.225);}
+  50%  {transform: rotate( 180deg) scale(.25);}
+  75%  {transform: rotate( 270deg) scale(.225);}
+  100% {transform: rotate( 360deg) scale(.2);}
+}
+@keyframes animCircle{
+   0%   {transform: rotate( 0deg) scale(.2);}
+  25%  {transform: rotate( 90deg) scale(.225);}
+  50%  {transform: rotate( 180deg) scale(.25);}
+  75%  {transform: rotate( 270deg) scale(.225);}
+  100% {transform: rotate( 360deg) scale(.2);}
+}
+@-webkit-keyframes fadeOut{
+  0%   { opacity: 0;left: -60em;}
+  20% { opacity: 1;left: -2em; }
+  80% { opacity: 1;left: -1em; }
+  100%   { opacity: 0;left: 60em;}
+}
+@-moz-keyframes fadeOut{
+  0%   { opacity: 0;left: -60em;}
+  20% { opacity: 1;left: -2em; }
+  80% { opacity: 1;left: -1em; }
+  100%   { opacity: 0;left: 60em;}
+}
+@-o-keyframes fadeOut{
+  0%   { opacity: 0;left: -60em;}
+  20% { opacity: 1;left: -2em; }
+  80% { opacity: 1;left: -1em; }
+  100%   { opacity: 0;left: 60em;}
+}
+@keyframes fadeOut{
+  0%   { opacity: 0;left: -60em;}
+  20% { opacity: 1;left: -2em; }
+  80% { opacity: 1;left: -1em; }
+  100%   { opacity: 0;left: 60em;}
+}
+
+@-webkit-keyframes fadeIn{
+  0%   { opacity: 0;left: 0.8em;}
+  20% { opacity: 1;left: -0.8em; }
+  80% { opacity: 1;left: -2em; }
+  100%   { opacity: 0;left: -60em;}
+}
+@-moz-keyframes fadeIn{
+  0%   { opacity: 0;left: 0.8em;}
+  20% { opacity: 1;left: -0.8em; }
+  80% { opacity: 1;left: -2em; }
+  100%   { opacity: 0;left: -60em;}
+}
+@-o-keyframes fadeIn{
+  0%   { opacity: 0;left: 0.8em;}
+  20% { opacity: 1;left: -0.8em; }
+  80% { opacity: 1;left: -2em; }
+  100%   { opacity: 0;left: -60em;}
+}
+@keyframes fadeIn{
+  0%   { opacity: 0;left: 0.8em;}
+  20% { opacity: 1;left: -0.8em; }
+  80% { opacity: 1;left: -2em; }
+  100%   { opacity: 0;left: -60em;}
+}
+.step1{
+    -webkit-animation: fadeIn 1s ease-in-out 0s;
+    -moz-animation:    fadeIn 1s ease-in-out 0s;
+    -o-animation:      fadeIn 1s ease-in-out 0s;
+    animation:         fadeIn 1s ease-in-out 0s;
+}
+.step2{
+    -webkit-animation: fadeIn 1.2s ease-in-out 1s;
+    -moz-animation:    fadeIn 1.2s ease-in-out 1s;
+    -o-animation:      fadeIn 1.2s ease-in-out 1s;
+    animation:         fadeIn 1.2s ease-in-out 1s;
+}
+.step3{
+    -webkit-animation: fadeIn 1.1s ease-in-out 2.3s;
+    -moz-animation:    fadeIn 1.1s ease-in-out 2.3s;
+    -o-animation:      fadeIn 1.1s ease-in-out 2.3s;
+    animation:         fadeIn 1.1s ease-in-out 2.3s;
+}
+.step4{
+    -webkit-animation: fadeOut 1s ease-in-out 3.5s;
+    -moz-animation:    fadeOut 1s ease-in-out 3.5s;
+    -o-animation:      fadeOut 1s ease-in-out 3.5s;
+    animation:         fadeOut 1s ease-in-out 3.5s;
+}
+
 
 #countryName{
 	float:right;
 }
 
-html,body, fullSize{
+html,body, .fullSize{
 	height:device-height;
 	width:device-width;
 	margin:0px;
+}
+#animStepIntro{
+	position:absolute;
+	top:0em;
+	left:0em;
+	width:100%;
+	height:100%;
+}
+#masterMapApp{
+	opacity:0;
 }
 
 .heading{
@@ -270,7 +453,7 @@ div.padded{
 
 	.worldDiv{
 		background-color:@isBlack;
-		background-image:url('http://www.planetkevin.com/svgVideo/worldBG.jpg');
+		background-image:url('../assets/worldBG.jpg');
 		position:absolute;
 		top:0px;
 		left:0px;
@@ -449,7 +632,7 @@ div.padded{
 
 	.worldDiv{
 		background-color:#000;
-		background-image:url('http://www.planetkevin.com/svgVideo/worldBG.jpg');
+		background-image:url('../assets/worldBG.jpg');
 		position:absolute;
 		top:0px;
 		left:0px;

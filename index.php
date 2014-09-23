@@ -1,186 +1,167 @@
 <!doctype html>
-<html manifest="small.manifest.appcache">
-<head><title>PK Pocket Edition Loading...</title>
-<meta charset="utf-8">
+<html>
+<head>
+<title>Planet Kevin Pocket Edition</title>
 <link rel="dns-prefetch" href="//www.planetkevin.com">
-<!--link rel="prefetch" href="//www.planetkevin.com" -->
+<link rel="prefetch" href="//www.planetkevin.com">
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Preloader">
+<meta name="keywords" content="Angular -> SVG -> D3 -> JQuery -> Google Map v3 -> Less -> AJAX -> JavaScript -> HTML">
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name = "viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,width=device-width" />
-<!--
 
-    This page performs preloading and storage functions for the
-    Planet Kevin Pocket Edition App. It tests for the availability
-    of cached SVG and PHP information, and if available, sends the 
-    user to index2.php, the actual home page. If not available, it
-    preloads these two heavy assets, and then forwards the user to 
-    the actual home page.
+<meta name="google-translate-customization" content="6443661d1806cc88-e247877e22d7d36d-g9c137a6467da3e2a-1c"></meta>
 
+<script src='js/libs/jquery-1.9.1.min.js'></script>
 
--->
-        <style type="text/css">
-            div{
-                text-align: center;
-                margin: auto;
-                padding: 1em;
-                vertical-align: middle;
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                font: 400 1.2em "Segoe UI", "Roboto", "Helvetica Neue Interface m3", Arial, sans-serif;
-                color:  #700;
-            }
+<link rel="stylesheet/less" type="text/css" href="css/main.less" />
+<script>
+  $(document).ready(function (){
+      var controllers=[
+          "body",
+          "key",
+          "main",
+          "footer",
+          "contact",
+          "navigation",
+          "travel",
+          "translate",
+          "weather",
+          "wikipedia",
+          "currency",
+          "svg",
+          "ad"
+      ];
+      setTimeout(function(){
+        var _script;
+        $.each( controllers, function( index, value ){
+            _script = document.createElement( "script" );
+            _script.type = "text/javascript";
+            _script.src = "js/controllers/" + value + "Controller.js";
+            $("body").append(_script);
+        });
+      }, 500);
+  });
 
-            @media screen and (min-width: 720px){
-                div{
-                    font: 700 1.6em "Segoe UI", "Roboto", "Helvetica Neue Interface m3", Arial, sans-serif;
-                }
-            }
+/*
+    Less is used to support responsive design, and with the variables defined 
+    below, it passes JS window information as variables. This was required to 
+    support the known size, 1080 x 460, of the SVG world map. 
 
-            .fromZero{
-                position: absolute;
-                left: 0em;
-                top: 8em;
-                opacity: 0;
-            }
-            .loader{
-                position: absolute;
-                top: 0em;
-                left: 0em;
-                right: 0em;
-                bottom: 0em;
-                z-index: 987654321;
-                width: 100%;
-                height: 100%;
-            }
-            .yinYang{
-                position: absolute;
-                top: -2.0em;
-                left: 0em;
-                right: 0em;
-                background-image:  url(assets/yinYang.png);
-                width: 360px;
-                height: 360px;
-                margin: auto;
-                padding: 0em;
-                fill: #000;
-                color: #000;
-                transform:scale(.1);
-            }
-            .animCircleInf{
-                -webkit-animation: animCircle 1.5s linear 0s 9;
-                -moz-animation:    animCircle 1.5s linear 0s 9;
-                -o-animation:      animCircle 1.5s linear 0s 9;
-                animation:         animCircle 1.5s linear 0s 9;
-            }
-            @-webkit-keyframes animCircle{
-               0%   {-webkit-transform: rotate( 0deg) scale(.2);}
-              25%  {-webkit-transform: rotate( 90deg) scale(.225);}
-              50%  {-webkit-transform: rotate( 180deg) scale(.25);}
-              75%  {-webkit-transform: rotate( 270deg) scale(.225);}
-              100% {-webkit-transform: rotate( 360deg) scale(.2);}
-            }
-            @-moz-keyframes animCircle{
-               0%   {transform: rotate( 0deg) scale(.2);}
-              25%  {transform: rotate( 90deg) scale(.225);}
-              50%  {transform: rotate( 180deg) scale(.25);}
-              75%  {transform: rotate( 270deg) scale(.225);}
-              100% {transform: rotate( 360deg) scale(.2);}
-            }
-            @-o-keyframes animCircle{
-               0%   {transform: rotate( 0deg) scale(.2);}
-              25%  {transform: rotate( 90deg) scale(.225);}
-              50%  {transform: rotate( 180deg) scale(.25);}
-              75%  {transform: rotate( 270deg) scale(.225);}
-              100% {transform: rotate( 360deg) scale(.2);}
-            }
-            @keyframes animCircle{
-               0%   {transform: rotate( 0deg) scale(.2);}
-              25%  {transform: rotate( 90deg) scale(.225);}
-              50%  {transform: rotate( 180deg) scale(.25);}
-              75%  {transform: rotate( 270deg) scale(.225);}
-              100% {transform: rotate( 360deg) scale(.2);}
-           }
-           @-webkit-keyframes fadeOut{
-              0%   { opacity: 0;left: -60em;}
-              20% { opacity: 1;left: -2em; }
-              80% { opacity: 1;left: -1em; }
-              100%   { opacity: 0;left: 60em;}
-            }
-            @-moz-keyframes fadeOut{
-              0%   { opacity: 0;left: -60em;}
-              20% { opacity: 1;left: -2em; }
-              80% { opacity: 1;left: -1em; }
-              100%   { opacity: 0;left: 60em;}
-            }
-            @-o-keyframes fadeOut{
-              0%   { opacity: 0;left: -60em;}
-              20% { opacity: 1;left: -2em; }
-              80% { opacity: 1;left: -1em; }
-              100%   { opacity: 0;left: 60em;}
-            }
-            @keyframes fadeOut{
-              0%   { opacity: 0;left: -60em;}
-              20% { opacity: 1;left: -2em; }
-              80% { opacity: 1;left: -1em; }
-              100%   { opacity: 0;left: 60em;}
-            }
+    The resizing and orientation events affect the Less global variables, so
+    all of its business logic is included together in this script element.
+*/
+var svgW=1080, svgH=460, bigW, smallW, halfW, thirdW, scaleW, scaleH, padding=10,
+userAgent=navigator.userAgent,uaFont="";
 
-            @-webkit-keyframes fadeIn{
-              0%   { opacity: 0;left: 0.8em;}
-              20% { opacity: 1;left: -0.8em; }
-              80% { opacity: 1;left: -2em; }
-              100%   { opacity: 0;left: -60em;}
-            }
-            @-moz-keyframes fadeIn{
-              0%   { opacity: 0;left: 0.8em;}
-              20% { opacity: 1;left: -0.8em; }
-              80% { opacity: 1;left: -2em; }
-              100%   { opacity: 0;left: -60em;}
-            }
-            @-o-keyframes fadeIn{
-              0%   { opacity: 0;left: 0.8em;}
-              20% { opacity: 1;left: -0.8em; }
-              80% { opacity: 1;left: -2em; }
-              100%   { opacity: 0;left: -60em;}
-            }
-            @keyframes fadeIn{
-              0%   { opacity: 0;left: 0.8em;}
-              20% { opacity: 1;left: -0.8em; }
-              80% { opacity: 1;left: -2em; }
-              100%   { opacity: 0;left: -60em;}
-            }
-            .step1{
-                -webkit-animation: fadeIn 1s ease-in-out 0s;
-                -moz-animation:    fadeIn 1s ease-in-out 0s;
-                -o-animation:      fadeIn 1s ease-in-out 0s;
-                animation:         fadeIn 1s ease-in-out 0s;
-            }
-            .step2{
-                -webkit-animation: fadeIn 1.2s ease-in-out 1s;
-                -moz-animation:    fadeIn 1.2s ease-in-out 1s;
-                -o-animation:      fadeIn 1.2s ease-in-out 1s;
-                animation:         fadeIn 1.2s ease-in-out 1s;
-            }
-            .step3{
-                -webkit-animation: fadeIn 1.1s ease-in-out 2.3s;
-                -moz-animation:    fadeIn 1.1s ease-in-out 2.3s;
-                -o-animation:      fadeIn 1.1s ease-in-out 2.3s;
-                animation:         fadeIn 1.1s ease-in-out 2.3s;
-            }
-            .step4{
-                -webkit-animation: fadeOut 1s ease-in-out 3.5s;
-                -moz-animation:    fadeOut 1s ease-in-out 3.5s;
-                -o-animation:      fadeOut 1s ease-in-out 3.5s;
-                animation:         fadeOut 1s ease-in-out 3.5s;
-            }
-        </style>
+if(userAgent.toLowerCase().indexOf("chrome")!=-1){
+    uaFont="Roboto";
+}else{
+    if(userAgent.toLowerCase().indexOf("firefox")!=-1){
+        uaFont='"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue"';
+    }else if(userAgent.toLowerCase().indexOf("firefox")!=-1){
+        uaFont='"Helvetica Neue Interface m3"';
+    }
+}
+
+if (uaFont.length>0) {
+    uaFont+= ", ";
+}
+
+uaFont+="Arial, sans-serif";
+
+function changeOrient(evt){
+    getCurrentDimensions();
+    less.modifyVars({
+        "@_BigW":(bigW * scaleW)-padding + "px",
+        "@_SmallW":(smallW * scaleW)-padding + "px",
+        "@_HalfW":((bigW-smallW)-padding  * scaleW) + "px",
+        "@HalfW":((bigW / 2)  * scaleW) + "px",
+        "@ThirdW":((bigW / 3)  * scaleW) + "px",
+        "@QtrW":((bigW / 4)  * scaleW) + "px",
+        "@_BigH":(svgHeight(bigW)-padding * scaleW) + "px",
+        "@_SmallH":(svgHeight(smallW)-padding * scaleW) + "px",
+        "@_HalfH":(smallW * scaleW) + "px",
+        "@userFont":uaFont
+    });
+    console.log("$window.changeOrient");
+}    
+
+function getCurrentDimensions(){
+    try{
+        bigW=Math.max(window.innerWidth, window.innerHeight);
+        smallW=Math.min(window.innerWidth, window.innerHeight);
+    }catch(noBodyClient){
+        try{
+            bigW=Math.max(document.body.clientWidth, document.body.clientHeight);
+            smallW=Math.min(document.body.clientWidth, document.body.clientHeight);
+        }catch(noBodyClient){
+            bigW=Math.max(window.screen.width, window.screen.height);
+            smallW=Math.min(window.screen.width, window.screen.height);
+        }
+    }
+    halfW=bigW/2;
+    thirdW=bigW/3;
+    scaleW=1; // svgW/bigW;
+}
+
+function svgHeight(num){
+    return Math.round(svgH/svgW * num);
+}
+
+getCurrentDimensions();
+
+less = {
+    env: "development",
+    async: false,
+    fileAsync: false,
+    poll: 1000,
+    globalVars:{
+        _BigW:(bigW * scaleW)-padding + "px",
+        _SmallW:(smallW * scaleW)-padding + "px",
+        _HalfW:((bigW-smallW)-padding  * scaleW) + "px",
+        HalfW:((bigW / 2)  * scaleW) + "px",
+        ThirdW:((bigW / 3)  * scaleW) + "px",
+        QtrW:((bigW / 4)  * scaleW) + "px",
+        _BigH:(svgHeight(bigW)-padding * scaleW) + "px",
+        _SmallH:(svgHeight(smallW)-padding * scaleW) + "px",
+        _HalfH:(smallW * scaleW) + "px",
+        userFont:uaFont
+    },
+    dumpLineNumbers: "comments",
+    relativeUrls: false,
+    rootpath: ""
+};
+
+window.addEventListener('orientationchange', changeOrient, false);
+window.addEventListener('resize', changeOrient, false);
+
+</script>
+
+<script src="js/libs/less-1.7.0.min.js"></script>
+<!-- script type="text/javascript" src="http://developer.oanda.com/oandajs/oanda.js"></script -->
+<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+<script src='js/libs/d3.v3.min.js'></script>
+
+<script src='js/libs/angular.js'></script>
+<script src="js/modules/angular-animate.js"></script>
+<script src="js/modules/angular-route.js"></script>
+<script src="js/modules/angular-ui-router.js"></script>
+<script src="js/modules/less_ng_module.js"></script>
+<script src="js/modules/local_crud_module.js"></script>
+<script src="js/modules/d3_module.js"></script>
+<script src="js/modules/map_module.js"></script>
+<script src="js/modules/il8nObj_module.js"></script>
+<script src="js/modules/weather_module.js"></script>
+
     </head>
     <body>
-        <div class="loader">
-        <div class="yinYang animCircleInf"></div>
+<div class="fullSize">
+
+        <div id="introDivHolder" class="loader">
+        <div class="yinYang animCircleInf introDiv"></div>
+        <div id="animStepIntro">
             <script>
 
                 function closeChild(){
@@ -188,13 +169,22 @@
                     document.body.removeChild(document.getElementById('preview'));
                 }
 
-                var d3DataURL="../angular/php/countryJSONObj.php";
-                var svgWorldURL="../svgVideo/d3World.fxg.svg";
+                var d3DataURL="php/countryJSONObj.php";
+                var svgWorldURL="assets/d3World.fxg.svg";
                 var prepped=[{"d3Data":false,"svgWorld":false}];
                 function doNext() {
                     if(prepped["d3Data"] && prepped["svgWorld"]){
-                      location.href="index2.php#/country/";
-                    }else{
+                       try{
+                        console.log("app starting...");
+                          document.getElementById("introDivHolder").style.display="none";
+                          angular.bootstrap(document, ['masterMapApp']);
+                      }catch(oops){
+                        setTimeout("doNext()",1000);
+                      }
+                        if(location.href.indexOf("/country/")==-1){
+                          location.href="#/country/";
+                        }
+                     }else{
                       setTimeout("doNext()",1000);
                     }
                 }
@@ -262,33 +252,91 @@
                     }
                     var str="";
                     if(searchURLs){
-                        str+='<div class="fromZero step1"><p>Welcome back!</p></div>';
-                        if(top.location.href.indexOf("angular/index2.php")==-1){
-                            setTimeout("doNext()",1500);
-                        }
+                      str+='<div class="fromZero step1 introDiv"><p>Welcome back!</p></div>';
+                      setTimeout("doNext()",1500);
                     }else{
-                        setTimeout("doNext()",4800);
+                        setTimeout("doNext()",4000);
                         if(localStorage["pkVisited"]){
-                            str+='<div class="fromZero step1"><p>Welcome back to</p></div>';
-                            str+='<div class="fromZero step2"><p>Planet Kevin</p></div>';
-                            str+='<div class="fromZero step3"><p>Loading Assets...</p></div>';
-                            str+='<div class="fromZero step4"><p>Loading...</p></div>';
+                            str+='<div class="fromZero step1 introDiv"><p>Welcome back to</p></div>';
+                            str+='<div class="fromZero step2 introDiv"><p>Planet Kevin</p></div>';
+                            str+='<div class="fromZero step3 introDiv"><p>Loading Assets...</p></div>';
+                            str+='<div class="fromZero step4 introDiv"><p>Loading...</p></div>';
                         }else{
-                            str+='<div class="fromZero step1"><p>Welcome to</p></div>';
-                            str+='<div class="fromZero step2"><p>Planet Kevin</p></div>';
-                            str+='<div class="fromZero step3"><p>Loading Assets...</p></div>';
-                            str+='<div class="fromZero step4"><p>Loading...</p></div>';
+                            str+='<div class="fromZero step1 introDiv"><p>Welcome to</p></div>';
+                            str+='<div class="fromZero step2 introDiv"><p>Planet Kevin</p></div>';
+                            str+='<div class="fromZero step3 introDiv"><p>Loading Assets...</p></div>';
+                            str+='<div class="fromZero step4 introDiv"><p>Loading...</p></div>';
                             localStorage["pkVisited"]=true;
                         }
                     }
                     document.write(str);
                     console.log(str);
                 }else{
-                    document.write('<div class="noStep"><p>This content can not be seen in your device and browser combination.</p></div>')
+                    document.write('<div class="noStep introDiv"><p>This content can not be seen in your device and browser combination.</p></div>')
                 }
                 /*
                 */
             </script>
         </div>
+      </div>
+        <div id="masterMapApp" class="fullSize">
+            <div ng-controller="BodyController" ng-init="$rootScope.svgToggle=true" class="fullSize">
+                <div ui-view="main" id="main" class="padded"></div>
+                <div ng-show="isLoaded==true" id="container" class="container">
+                    <div id="firstGroup">
+                        <div id="svgMap" ng-show="$rootScope.svgToggle==true" ng-include src="'views/svg-map.html'"></div>
+                        <div id="countryMapHolder" ng-init="countryToggle=true" class="holder {{countryToggle==true ? 'expanded' : 'collapsed'}}">
+                            <div class="toggler" class='countryMap' id="googleMapHeader">
+                                <span ng-click="countryToggle=!countryToggle">
+                                    {{'locale' | i18nObj:'_CountryToggle_'}}
+                                </span>
+                                <span class="smallSpan" ng-show="$rootScope.svgToggle==false" ng-click="$rootScope.svgToggle=!$rootScope.svgToggle">
+                                    {{'locale' | i18nObj:'_ShowWorld_'}}
+                                </span>
+                                <span class="smallSpan" ng-show="$rootScope.svgToggle==true" ng-click="$rootScope.svgToggle=!$rootScope.svgToggle">
+                                    {{'locale' | i18nObj:'_HideWorld_'}}
+                                </span>
+                            </div>
+                            <div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? '' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
+                            <!-- div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? 'tempClass' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
+                            <div class="{{$rootScope.svgToggle==true ? 'tempClass' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
+                            <div class="{{countrySelected==true ? '' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div -->
+                        </div>
+                    </div>
+                    <div id="secondGroup">
+                        <div id="weatherHolder" ng-init="$rootScope.weatherToggle=false" class="holder {{$rootScope.weatherToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="$rootScope.weatherToggle=!$rootScope.weatherToggle" id="weatherHeader">{{'locale' | i18nObj:'_WeatherToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="$rootScope.weatherToggle==true" id="weatherView" ng-include src="'views/weatherView.html'"></div>
+                        </div>
+                        <div id="travelHolder" class="holder {{travelToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="travelToggle=!travelToggle" id="travelHeader">{{'locale' | i18nObj:'_TravelToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="travelToggle==true" id="travelView" ng-include src="'views/travelView.html'"></div>
+                        </div>
+                        <div id="wikipediaHolder" class="holder {{wikipediaToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="wikipediaToggle=!wikipediaToggle" id="wikipediaHeader">{{'locale' | i18nObj:'_WikipediaToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="wikipediaToggle==true" id="wikipediaView" ng-include src="'views/wikipediaView.html'"></div>
+                        </div>
+                        <div id="currencyHolder" class="holder {{currencyToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="currencyToggle=!currencyToggle" id="currencyHeader">{{'locale' | i18nObj:'_CurrencyToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="currencyToggle==true" id="currencyView" ng-include src="'views/currencyView.html'"></div>
+                        </div>
+                        <div ng-init="adToggle=true" id="adHolder" class="holder {{adToggle==true ? 'expanded' : 'collapsed'}}">
+                            <div class="toggler" ng-click="adToggle=!adToggle" id="adHeader">{{'locale' | i18nObj:'_AboutToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="adToggle==true" id="adView" ng-include src="'views/adView.html'"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="pageBottom" class="pageBottom">
+                    <div class="rightFloater">{{'locale' | i18nObj:'_Footer_'}}</div>
+                    <div class="leftFloater">
+                        <div id="translateHolder" ng-include src="'views/translateView.html'"></div>
+                    </div>
+                    </div>
+                <div ng-show="isLoaded==false" id="interstitial">{{'locale' | i18nObj:'_Loading_'}}</div>
+                <div id="doesnotWork">{{'locale' | i18nObj:'_NoWork_'}}</div>
+            </div>
+        </div>
+        </div>
+        <script src='js/masterMapApp.js'></script>
     </body>
 </html>

@@ -23,7 +23,7 @@ var d3Module = angular.module('d3Module', [])
 				initialScale:0.4,
 				jsonURL:"php/countryJSONObj.php",
 				jsonOBJ:null,
-				svgURL:"/svgVideo/d3World.fxg.svg",
+				svgURL:"assets/d3World.fxg.svg",
 				d3Data:null,
 				inited:false,
 				scream:function(what){
@@ -386,6 +386,7 @@ var d3Module = angular.module('d3Module', [])
 						d3.json(this.jsonURL,function(err, d){
 							if(!err){
 								me.d3Data=d;
+								$rootScope.countries=me.d3Data.world.countries;
 								me.initSVG(me.defaultSVGWidth,me.defaultSVGHeight,"worldDiv",me.svgURL);
 							}else{
 								console.log("ERR("+err);
@@ -393,6 +394,7 @@ var d3Module = angular.module('d3Module', [])
 						});	
 						this.inited=true;
 					}else{
+						$rootScope.countries=me.d3Data.world.countries;
 						 me.initSVG(me.defaultSVGWidth,me.defaultSVGHeight,"worldDiv",me.svgURL);
 					}
 				}

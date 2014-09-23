@@ -15,6 +15,24 @@ var mapModule = angular.module('mapModule', [])
 				},
 				askToDetermineLocation:function(){
 				},
+				getCountryFromName:function(which, prop){
+					var _which=null;
+					if ($rootScope.countries.length>1){
+						for(var z=0;z<$rootScope.countries.length;z++){
+							if($rootScope.countries[z].CountryName==which){
+								if(prop){
+									_which= $rootScope.countries[z][prop]-1;
+								}else{
+									_which= z-1;
+								}
+							}
+						}
+						return _which;
+					}else{
+						var me=this, _which=which, _prop=prop;
+						setTimeout(function(){me.getCountryFromName(_which, _prop);},600)
+					};
+				},
 				determineLocation:function(){
 					if(!this.locationDetermined){
 						var me=this;
@@ -23,17 +41,17 @@ var mapModule = angular.module('mapModule', [])
 							type: 'POST', 
 							dataType: 'jsonp',
 							success: function(location) {
-			//					alert("NAME,navigator.onLine="+ navigator.onLine + ",  navigator.connection="+ navigator.connection);
 								var mapOptions= new google.maps.LatLng(location.latitude, location.longitude);
-								me.getCountryData($rootScope.getCountryFromName(location.country_name, "CountryID"), mapOptions);
+								me.getCountryData(me.getCountryFromName(location.country_name, "CountryID"), mapOptions);
 							},
 							error: function() {
-				//				alert("ERRORdetermineLocation=");
 								var mapOptions= new google.maps.LatLng(37.7699985,-122.4469347);
 								$rootScope.map=new google.maps.Map(document.getElementById("countryMap"), mapOptions);
 							}
 						})
 						this.locationDetermined=true;
+					}else{
+						console.log("end of operation");
 					}
 				},
 				centerCurrentCountry:function(_mapOptions){
@@ -51,8 +69,7 @@ var mapModule = angular.module('mapModule', [])
 					}else{
 						theCenter=_mapOptions;
 						theZoomFactor=13;
-					}// MapService.userActivated==false
-					console.log("centerCurrentCountry=" + theCenter + ":theZoomFactor=" + theZoomFactor );
+					}
 					mapOptions={
 						draggable:true,
 						zoom: theZoomFactor,
@@ -80,29 +97,28 @@ var mapModule = angular.module('mapModule', [])
 					return(this.currentCountry > -1 ? $rootScope.countries[this.currentCountry] : null)
 				},
 				getCountryData:function(whichCountry, mapOptions){
-					console.log("getCountryData=" + whichCountry);
-					if(this.currentCountry!=whichCountry){
-					console.log("UNIQUE getCountryData=" + whichCountry);
-						this.setCurrentCountry(whichCountry);
-						whichCountry++;
-						var me=this;
+					var me=this, _whichCountry=whichCountry, _mapOptions=mapOptions;
+					if ($rootScope.countries.length>1){
+						if(this.currentCountry!=whichCountry){
+							this.setCurrentCountry(whichCountry);
+							whichCountry++;
+						}
 						if(this.getCurrentCountry()){
 							var _mapOptions=mapOptions;
 							$http({method: 'GET', url: this.countriesURL  + "?CountryID="+ whichCountry})
 							.success(function(data, status, headers, config) {
-								console.log("SUCCESS UNIQUE getCountryData=");
 							 	me.getCurrentCountry().extended=true;
 							 	$state.go('country.detail',{CountryID:whichCountry});
 							 	me.centerCurrentCountry(_mapOptions);
 							})
 							.error(function(data, status, headers, config) {
-							console.log('faile=' + data)
-							// called asynchronously if an error occurs 
-							// or server returns response with an error status.
+								console.log('error=' + data);
 							});
 						}else{
-							console.log("NODCURRENTCOUNTRY")
+							console.log("NO CURRENT COUNTRY");
 						}
+					}else{
+						setTimeout(function(){me.getCountryData(_whichCountry, _mapOptions);},600)
 					}
 				},
 				init:function(){
@@ -111,15 +127,15 @@ var mapModule = angular.module('mapModule', [])
 						.success(function(data, status, headers, config) {
 							if(runOnce<1){
 								runOnce++;
+								console.log("successful init =" + data);
 								$rootScope.countries=data.world.countries;
 								$rootScope.continents=data.world.continents;
 								$rootScope.$broadcast( 'MapService.init' );
 							}
 						})
 						.error(function(data, status, headers, config) {
-							console.log('faile=' + data)
+							console.log('error=' + data);
 						});
-
 				},
 				_create:function(what){
 					

@@ -23,6 +23,7 @@ var masterMapApp=angular.module("masterMapApp",  [
 		};
 		$rootScope.getCountryFromName=function(which, prop){
 			var _which=null;
+			console.log("getCountryFromName(" + which + ":" + prop)
 			for(var z=0;z<$rootScope.countries.length;z++){
 				if($rootScope.countries[z].CountryName==which){
 					_which= prop ? $rootScope.countries[z-1][prop] : $rootScope.countries[z-1];

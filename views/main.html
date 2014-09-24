@@ -1,11 +1,11 @@
 <div ng-controller="MainCtrl">
 	<span class='heading'>{{'locale' | i18nObj:'_MainHead_'}}</span>
-	<input id="countryName" name="q" type="search" ng-model="q" 
+	<input id="countryName" name="countryName" type="search" ng-model="countryName" 
 		placeholder="{{'locale' | i18nObj:'_NavHelp_'}}" 
 		ng-model-options="{ getterSetter: true }"/>
 	<div class="halfSize">
-		<ul ng-show="q.length>1">
-		    <li ng-repeat="country in countries | filter:q">
+		<ul ng-show="countryName.length>1">
+		    <li ng-repeat="country in countries | filter:countryName">
 		    	<a ng-click="setCountry(country.CountryID)" 
 		    	>{{country.CountryName.split('+').join(' ').substring(0,20) }}</a>
 			</li>

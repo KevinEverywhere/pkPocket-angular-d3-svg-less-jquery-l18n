@@ -181,9 +181,9 @@ window.addEventListener('resize', changeOrient, false);
                       }catch(oops){
                         setTimeout("doNext()",1000);
                       }
-                        if(location.href.indexOf("/country/")==-1){
-                          location.href="#/country/";
-                        }
+                      if(location.href.indexOf("/country/")==-1){
+                        location.href="#/country/";
+                      }
                      }else{
                       setTimeout("doNext()",1000);
                     }

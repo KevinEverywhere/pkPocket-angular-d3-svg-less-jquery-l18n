@@ -89,6 +89,31 @@ var mapModule = angular.module('mapModule', [])
 						}
 					}
 				},
+				setCurrentLocation:function(position){
+					if(this.currentLocation!=true){
+					  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					  var mapOptions = {
+					    zoom: 15,
+					    center: latlng,
+					    mapTypeControl: false,
+					    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+					    mapTypeId: google.maps.MapTypeId.ROADMAP
+					  };
+					try{
+						$rootScope.map.setOptions(mapOptions);
+					}catch(oops){
+						try{
+							$rootScope.map=new google.maps.Map(document.getElementById("countryMap"), mapOptions);
+						}catch(oops){
+							console.log("element not ready")
+							$rootScope.map=new google.maps.Map(document.getElementById("countryMap"), mapOptions);
+						}
+		//				 	alert("NO CURRENT COUNTRY(" + whichCountry + "; $window.navigator.userAgent=" + $window.navigator.userAgent);
+					}
+					}else{
+						console.log("Set Current Location");
+					}
+				},
 				setCurrentCountry:function(toWhich){
 					this.currentCountry=toWhich;
 					//$rootScope.swapHighlights(this.getCurrentCountry().GeoObject);
@@ -115,7 +140,15 @@ var mapModule = angular.module('mapModule', [])
 								console.log('error=' + data);
 							});
 						}else{
-							console.log("NO CURRENT COUNTRY");
+							if (navigator.geolocation) {
+							  navigator.geolocation.getCurrentPosition(function(position){
+							  	me.setCurrentLocation(position);
+							  }, function(error){
+								  console.log(arguments);
+								});
+							} else {
+							  error('not supported');
+							}
 						}
 					}else{
 						setTimeout(function(){me.getCountryData(_whichCountry, _mapOptions);},600)

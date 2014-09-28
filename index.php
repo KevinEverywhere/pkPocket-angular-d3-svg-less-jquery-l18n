@@ -163,12 +163,7 @@ window.addEventListener('resize', changeOrient, false);
         <div class="yinYang animCircleInf introDiv"></div>
         <div id="animStepIntro">
             <script>
-
-                function closeChild(){
-                    document.getElementById("preview").style.display="none";
-                    document.body.removeChild(document.getElementById('preview'));
-                }
-
+            
                 var d3DataURL="php/countryJSONObj.php";
                 var svgWorldURL="assets/d3World.fxg.svg";
                 var prepped=[{"d3Data":false,"svgWorld":false}];

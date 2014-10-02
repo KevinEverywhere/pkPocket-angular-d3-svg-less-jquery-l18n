@@ -157,13 +157,13 @@ window.addEventListener('resize', changeOrient, false);
 
     </head>
     <body>
-<div class="fullSize">
+<div class="fullSize" id="completeContainer">
 
         <div id="introDivHolder" class="loader">
         <div class="yinYang animCircleInf introDiv"></div>
         <div id="animStepIntro">
             <script>
-            
+
                 var d3DataURL="php/countryJSONObj.php";
                 var svgWorldURL="assets/d3World.fxg.svg";
                 var prepped=[{"d3Data":false,"svgWorld":false}];
@@ -171,6 +171,7 @@ window.addEventListener('resize', changeOrient, false);
                     if(prepped["d3Data"] && prepped["svgWorld"]){
                        try{
                         console.log("app starting...");
+                          document.getElementById("introDivHolder").style.visibility="hidden";
                           document.getElementById("introDivHolder").style.display="none";
                           angular.bootstrap(document, ['masterMapApp']);
                       }catch(oops){

@@ -6,7 +6,7 @@
 	<div class="halfSize">
 		<ul ng-show="countryName.length>1">
 		    <li ng-repeat="country in countries | filter:countryName">
-		    	<a ng-click="setCountry(country.CountryID)" 
+		    	<a id="{{country.CountryName.split('+').join(' ').substring(0,20)}}" ng-click="setCountry(country.CountryID)" 
 		    	>{{country.CountryName.split('+').join(' ').substring(0,20) }}</a>
 			</li>
 		</ul>

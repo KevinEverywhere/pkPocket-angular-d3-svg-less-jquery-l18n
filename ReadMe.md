@@ -25,8 +25,11 @@ when the window is resized or the orientation is changed. The
 properties that are device and browser specific include:
 
 **uaFont**:		This is set for each browser/device type.
+
 **bigW**:		This refers to the width in landscape mode.
+
 **smallW**:		This refers to the width in portrait mode.
+
 **halfW**:		This is equal to half the landscape width.
 
 These are updated through the getCurrentDimensions function.
@@ -72,9 +75,13 @@ a number of existing modules, as well as a number of custom modules,
 such as:
 
 **d3Module**:		Used to interact with the SVG world map.
+
 **mapModule**:		Used to interact with the Google Maps API
+
 **weatherModule**:	Disabled currently due to usage restrictions
+
 **il8nObj**:		Used to provide localization functionality
+
 **localCRUD**:		Provides localStorage functionality
 
 A number of properties and functions used across modules are 
@@ -86,8 +93,8 @@ routing requirements, are defined here.
 
 #### Structure:
 
-	index.php 	*preloader and local storage check*
-	index2.php 	*principal file*
+index.php 	*preloader and local storage check*
+index2.php 	*principal file*
 	--assets 	*images*
 	--css 		*main.less, single stylesheet*
 	--js

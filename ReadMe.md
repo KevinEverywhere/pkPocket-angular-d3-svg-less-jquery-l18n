@@ -85,16 +85,15 @@ such as:
 **localCRUD**:		Provides localStorage functionality
 
 A number of properties and functions used across modules are 
-attached to $rootScope here. 
+attached to $rootScope in masterMapApp. 
 
-A number of $broadcast events, as well as the application's
-routing requirements, are defined here.
+Also, a number of $broadcast events and the application's
+routing requirements are defined here.
 
 
 #### Structure:
 
-	index.php 	preloader and local storage check
-	index2.php 	principal file
+	index.php 	contains preloader and angular app
 	--assets 	images
 	--css 		main.less, single stylesheet
 	--js

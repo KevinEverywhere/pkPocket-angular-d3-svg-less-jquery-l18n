@@ -93,22 +93,22 @@ routing requirements, are defined here.
 
 #### Structure:
 
-index.php 	*preloader and local storage check*
-index2.php 	*principal file*
-	--assets 	*images*
-	--css 		*main.less, single stylesheet*
+	index.php 	preloader and local storage check
+	index2.php 	principal file
+	--assets 	images
+	--css 		main.less, single stylesheet
 	--js
 		--controllers
-				*assigned one for each graphic element (view)*
+				assigned one for each graphic element (view)
 		--l18n
-				*localization*
+				localization
 		--libs
-				*angular, d3, jquery, less, underscore*
+				angular, d3, jquery, less, underscore
 		--modules
-				*business logic*
-	--php 		*Not Included*
-	--testing	*Various testing frameworks*
-	--views		*each independent screen element has its own view*
+				business logic
+	--php 		Not Included
+	--testing	Various testing frameworks
+	--views		each independent screen element has its own view
 
 This code is not guaranteed to do anything. There are many bugs that 
 I know to exist and many others that I do not. This page will be
@@ -116,9 +116,4 @@ updated to remain current with the application content files. Contact
 kevin@planetkevin.com for additional information.
 
 This page was last updated October 3, 2014.
-
-
-
-
-
 

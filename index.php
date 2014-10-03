@@ -17,6 +17,11 @@
 
 <link rel="stylesheet/less" type="text/css" href="css/main.less" />
 <script>
+
+//  The angular controllers for the application are added after the rest of the page
+//  has loaded. This reduces the overall load time, although it requires the
+//  application to be bootstrapped.
+
   $(document).ready(function (){
       var controllers=[
           "body",
@@ -249,9 +254,9 @@ window.addEventListener('resize', changeOrient, false);
                     var str="";
                     if(searchURLs){
                       str+='<div class="fromZero step1 introDiv"><p>Welcome back!</p></div>';
-                      setTimeout("doNext()",1500);
+                      setTimeout("doNext()",1000);
                     }else{
-                        setTimeout("doNext()",4000);
+                        setTimeout("doNext()",3000);
                         if(localStorage["pkVisited"]){
                             str+='<div class="fromZero step1 introDiv"><p>Welcome back to</p></div>';
                             str+='<div class="fromZero step2 introDiv"><p>Planet Kevin</p></div>';

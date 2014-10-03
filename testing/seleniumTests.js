@@ -5,7 +5,17 @@
 //		node seleniumTests.js
 
 (function(whichBrowser){
-	var timer=3000;
+	var timer=5000;
+	var resizeWindow=function(w, h){
+		driver.manage().window().setSize(w, h)
+	}
+	var windowSizes=[
+		[1024, 768, "Standard tablet landscape"],
+		[768, 1024, "Standard tablet portrait"],
+		[667, 375, "iPhone 6 / pixel-halved landscape"],
+		[960, 540, "iPhone 6 Plus / pixel-halved landscape"],
+		[375, 667, "iPhone 6 / pixel-halved portrait"]
+	];
 	var testURL='http://www.planetkevin.com/angular/';		// Put your own URL here.
 	var webdriver = require('selenium-webdriver');
 	var driver = new webdriver.Builder().withCapabilities(
@@ -44,11 +54,16 @@
 			return browserTest.countryArray[browserTest.currentTestCountry];
 		},
 		beginAppTesting:function() {
-			console.log("begin App Testing,...")
-			timeout(timer * 2).then(browserTest.checkPage);
+			console.log("App Testing... Preparing for window size and country selection tests. ");
+			timeout(timer).then(browserTest.checkPage);
 		},
 		checkPage:function(ms) {
-			console.log("checking page after "+ms+" milliseconds.");
+			console.log("Resizing window for " + windowSizes[browserTest.currentTestCountry][2]);
+			resizeWindow(
+				windowSizes[browserTest.currentTestCountry][0],
+				windowSizes[browserTest.currentTestCountry][1]
+			);
+			console.log("Page will change layout in "+ms+" milliseconds.");
 			driver.findElement(webdriver.By.name('countryName'))
 			.then(browserTest.enterCountryName)
 			.then(browserTest.selectCountryName)

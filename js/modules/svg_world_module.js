@@ -340,7 +340,8 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					console.log("through.svgCallClickThrough=" + evt.target + 'svgCall=' + evt);
 					// 
 					$window.myObj=this.fromCountryCode(evt.target.parentNode.id);
-					console.log("svgCall=" + this.fromCountryCode(evt.target.parentNode.id));
+
+					console.log("svgCall=" + this.d3Data.world.countries[this.fromCountryCode(evt.target.parentNode.id)+1].GeoObject);
 
 					var target = evt.target;
 					this._target=evt;

@@ -313,7 +313,7 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 									}
 								}
 								this.bindCountryObject(this.getCountry(theID), "incrSelected", whichCountry, whichEl);
-								MapService.getCountryData(this.currentCountryObj.CountryID-1);
+								MapService.getCountryData(this.currentCountryObj.CountryID);
 								$rootScope.$broadcast("countrySelected",{Country:this.currentCountryObj});
 							}catch(oops){
 							console.log('noBueno');
@@ -337,11 +337,14 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					this.highlightCountry(this.currentCountryObj.GeoObject);
 				},
 				svgCallClickThrough:function(evt){
-					console.log("through.svgCallClickThrough=" + evt.target + 'svgCall=' + evt);
+					console.log(evt.target.parentNode.id + " is at .svgCallClickThrough=" + evt.target + 'svgCall=' + evt);
 					// 
 					$window.myObj=this.fromCountryCode(evt.target.parentNode.id);
-
-					console.log("svgCall=" + this.d3Data.world.countries[this.fromCountryCode(evt.target.parentNode.id)+1].GeoObject);
+					if(evt.target.parentNode.id == "worldDiv"){
+						console.log("svgCall=No Country=" + evt.target.id);
+					}else{
+						console.log("svgCall=" + this.d3Data.world.countries[this.fromCountryCode(evt.target.parentNode.id)+1].GeoObject);
+					}
 
 					var target = evt.target;
 					this._target=evt;
@@ -392,7 +395,7 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 				fromCountryCode:function(which){
 					var w=null;
 					for(var z=0;z<this.countryCodes.length;z++){
-						if(this.countryCodes[z].code==which){
+						if(this.countryCodes[z].code===which){
 							w=MapService.getCountryFromName(this.countryCodes[z].name);
 						}
 					}

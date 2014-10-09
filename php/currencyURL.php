@@ -233,6 +233,7 @@ array_push($currencyArray,array("MAD","Moroccan Dirham","Western Sahara"));
 array_push($currencyArray,array("YER","Yemeni Rial","Yemen"));
 array_push($currencyArray,array("ZMK","Zambian Kwacha","Zambia"));
 array_push($currencyArray,array("ZWD","Zimbabwe Dollar","Zimbabwe"));
+array_push($currencyArray,array("SSP","South Sudanese Pound","South Sudan"));
 
 $theCurrency=-1;
 

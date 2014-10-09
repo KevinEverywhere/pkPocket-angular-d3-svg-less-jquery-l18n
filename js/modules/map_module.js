@@ -9,7 +9,7 @@ var mapModule = angular.module('mapModule', [])
 				userActivated:false,
 				locationDetermined:false,
 				isInited:false,
-				countriesURL:"php/countryJSONObj.php",
+				countriesURL:"assets/world.json",
 				scream:function(what){
 					console.log("SCREAM=" + what);
 				},

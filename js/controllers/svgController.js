@@ -6,10 +6,10 @@ masterMapApp
 			var mapClick=function(whichElement){
 				console.log("SVGController.mapClick("+whichElement+")");
 			}
-			var d3World=D3Service, countryURL="php/countryJSONObj.php";
+			var d3World=D3Service, countryURL="assets/world.json";
 			if(LocalCRUDService.manageLocalCRUD('retrieve', 'd3Data')){
 				d3World.d3Data=LocalCRUDService.manageLocalCRUD('retrieve', 'd3Data');
-				d3World.init(d3World.defaultSVGWidth,d3World.defaultSVGHeight,"#worldDiv", "assets/d3World.fxg.svg");
+				d3World.init(d3World.defaultSVGWidth,d3World.defaultSVGHeight,"#worldDiv", "assets/groupedWorld.svg");
 			}else{
 				var _LocalCRUDService=LocalCRUDService;
 				d3World.d3Data=null; // d3.json("d3SVG");
@@ -20,9 +20,9 @@ masterMapApp
 						d3World.d3Data=d;
 						_LocalCRUDService.manageLocalCRUD("create",{"key":"d3Data","value":d});
 						d3World.init(d3World.defaultSVGWidth,d3World.defaultSVGHeight,"#worldDiv",
-							"assets/d3World.fxg.svg");
+							"assets/groupedWorld.svg");
 					}else{
-						console.log("assets/d3World.fxg.svg----ERROR---");
+						console.log("assets/groupedWorld.svg----ERROR---");
 					}
 				});
 			}

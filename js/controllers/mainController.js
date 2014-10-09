@@ -6,10 +6,9 @@ masterMapApp.controller('MainCtrl',
 	["$scope", "$rootScope", "$http", "$stateParams", "$q", "MapService", "D3Service",
 	function MainCtrl($scope, $rootScope, $http, $stateParams, $q, MapService, D3Service) {
 		var countries=$rootScope.countries;
- 		$scope.setCountry=function (toWhich){
+ 		$scope.setCountry=function (cID){
 			$scope.countryName="";
 			console.log('MapService=' + MapService)
-			var cID=toWhich-1;
 			MapService.getCountryData(cID);
 			$scope.$broadcast("countrySelected");
 			$rootScope.$broadcast("countrySelected",{Country:$rootScope.countries[cID]});
@@ -23,8 +22,8 @@ masterMapApp.controller('MainCtrl',
 		}else{
 			if($stateParams.CountryID){
 				console.log('MainCtrl.MapService.setCountry=' +  $stateParams.CountryID)
-				MapService.getCountryData($stateParams.CountryID-1);
-				$rootScope.$broadcast("countrySelected",{Country:$rootScope.countries[$stateParams.CountryID-1]});
+				MapService.getCountryData($stateParams.CountryID);
+				$rootScope.$broadcast("countrySelected",{Country:$rootScope.countries[$stateParams.CountryID]});
 			}
 		}
 	}

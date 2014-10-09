@@ -4,12 +4,11 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 //		.service('svgWorldService', ["$window", "$rootScope", "$http", "$q", "$state", "MapService", "LocalCRUDService",
 		.service('D3Service', ["$window", "$rootScope", "$http", "$q", "$state", "MapService", "LocalCRUDService",
 		 function($window, $rootScope, $http, $q, $state, MapService, LocalCRUDService) {
-			var jsonURL="php/countryJSONObj.php"; //"countryJSONObj.php";
+			var jsonURL="assets/world.json"; //"countryJSONObj.php";
 			var service={
 				_width:-1,
 				_height:-1,
 				contentArray:[],
-				countryCodes:[],
 				currentContent:-1,
 				currentCountry:null,
 				currentCountryObj:null,
@@ -23,8 +22,7 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 				defaultSVGHeight:460,
 				records:[],
 				initialScale:0.4,
-				countryCodesURL:"assets/country_code_name.json",
-				jsonURL:"php/countryJSONObj.php",
+				jsonURL:"assets/world.json",
 				jsonOBJ:null,
 				svgURL:"assets/groupedWorld.svg",
 				d3Data:null,
@@ -37,7 +35,6 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					this._height=_height;
 					this.targetContainer=targetContainer;
 					this.contentAddress=contentAddress;
-					this.initCountryCodes();
 					this.initMyContent();
 					this.loadSVG(this.getCurrent());
 				},
@@ -292,49 +289,50 @@ var svgWorldModule = angular.module('svgWorldModule', [])
  				},
 				highlightCountry:function(whichCountry){
 					console.log("highlightCountry:function(" + whichCountry)
-					d3.select(whichCountry.indexOf("#")==0 ? whichCountry : "#" + whichCountry).attr('opacity',.1)
+					d3.select("#" + whichCountry.Code).attr('opacity',0.1)
  				},
 				unhighlightCountry:function(whichCountry){
 					console.log("UN HLCountry:function(" + whichCountry)
-					d3.select(whichCountry.indexOf("#")==0 ? whichCountry : "#" + whichCountry).attr('opacity',1)
+					d3.select("#" + whichCountry.Code).attr('opacity',1)
  				},
 				setCountry:function(whichCountry, whichEl){
-					console.log("whichCountry.TS="+ whichCountry.toString() + ";whichEl=" + whichEl);
-					if(this.currentCountryObj== null ||  whichCountry!= this.currentCountryObj.countryImg){
-						var theID= $(whichCountry).attr('id') ? $(whichCountry).attr('id') : (whichCountry.context ? whichCountry.context.href.baseVal : null); 
-						if(theID != null){
+					console.log("whichCountry.code="+ whichCountry.Code);
+					if(this.currentCountryObj== null ||  whichCountry!= this.currentCountryObj){
+						console.log("inner.TS="+ whichCountry.CountryName + ";whichEl=" + whichEl);
+			//			var theID= $(whichCountry).attr('id') ? $(whichCountry).attr('id') : (whichCountry.context ? whichCountry.context.href.baseVal : null); 
+			//			if(theID != null){
 							MapService.userActivated=true;
 							try{
-								console.log("theID=" + theID)
-								if(this.getCountry(theID) != null && (this.currentCountryObj!=this.getCountry(theID))){
+								console.log("theID=" + this.currentCountryObj)
+					//			if(this.getCountry(theID) != null && (this.currentCountryObj!=this.getCountry(theID))){
 									if(this.currentCountryObj !=null){
 										console.log("this.currentCountryObj")
 										this.currentCountryObj.updateSelectShading();
 									}
-								}
-								this.bindCountryObject(this.getCountry(theID), "incrSelected", whichCountry, whichEl);
+					//			}
+								this.bindCountryObject(whichCountry, "incrSelected",  whichEl);
 								MapService.getCountryData(this.currentCountryObj.CountryID);
 								$rootScope.$broadcast("countrySelected",{Country:this.currentCountryObj});
 							}catch(oops){
 							console.log('noBueno');
 							}
 						}
-					}
+			//		}
 				},
-				bindCountryObject:function(obj, func, svg, whichEl){
+				bindCountryObject:function(obj, func, whichEl){
 					if(this.currentCountryObj){
-						this.unhighlightCountry(this.currentCountryObj.GeoObject);
+						this.unhighlightCountry(this.currentCountryObj);
 					}
 					if(func){
 						if(!obj.selectedTimes){
-							this.createCountryObject(obj, svg, whichEl);
+							this.createCountryObject(obj, whichEl);
 						}
 						this.currentCountryObj=obj;
 						obj[func]();
 					}else{
 						this.currentCountryObj=obj;
 					}
-					this.highlightCountry(this.currentCountryObj.GeoObject);
+					this.highlightCountry(this.currentCountryObj);
 				},
 				svgCallClickThrough:function(evt){
 					console.log(evt.target.parentNode.id + " is at .svgCallClickThrough=" + evt.target + 'svgCall=' + evt);
@@ -343,25 +341,9 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					if(evt.target.parentNode.id == "worldDiv"){
 						console.log("svgCall=No Country=" + evt.target.id);
 					}else{
-						console.log("svgCall=" + this.d3Data.world.countries[this.fromCountryCode(evt.target.parentNode.id)+1].GeoObject);
+						console.log("svgCall=" + this.fromCountryCode(evt.target.parentNode.id).CountryName);
 					}
-
-					var target = evt.target;
-					this._target=evt;
-					try{
-						if(evt.target && evt.target.correspondingUseElement){
-						console.log("correspondingUseElement");
-							this.setCountry($(evt.target.correspondingUseElement), evt.target)
-						}else if(evt.target.href){
-						console.log("basedval2");
-				//			var _target=d3.selectAll("use").filter(function(d,i){return this.href.baseVal==d3World._target.target.href.baseVal});
-							var _target=d3.selectAll("symbol").filter(function(d,i){return (evt.target.href.baseVal.indexOf(this.id)!=-1)});
-							this.setCountry($(evt.target), _target)
-						console.log("basedval3");
-						}
-					}catch(oops){
-						console.log("uh oh");
-					}
+					this.setCountry(this.fromCountryCode(evt.target.parentNode.id), evt.target.parentNode);
 					this.svgClicked=false;
 				},
 				svgCallDoubleClick:function(evt){
@@ -393,27 +375,13 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					this.incrementContent();
 				},
 				fromCountryCode:function(which){
-					var w=null;
-					for(var z=0;z<this.countryCodes.length;z++){
-						if(this.countryCodes[z].code===which){
-							w=MapService.getCountryFromName(this.countryCodes[z].name);
+					var w=null,arr=this.d3Data.world.countries;
+					for(var z=0;z<arr.length;z++){
+						if(arr[z].Code===which){
+							w=arr[z];
 						}
 					}
 					return(w);
-				},
-				initCountryCodes:function(){
-					var me=this;
-					console.log("initCountryCodes...=" + this.countryCodesURL);
-					d3.json(this.countryCodesURL,function(err, d){
-						if(!err){
-							console.log("initCountryCodes=" + d.length);
-							for(var z=0;z<d.length;z++){
-								me.countryCodes[z]=d[z];
-							}
-						}else{
-							console.log("ERROR=" + err);
-						}
-					});
 				},
 				init:function(){
 					var me=this;

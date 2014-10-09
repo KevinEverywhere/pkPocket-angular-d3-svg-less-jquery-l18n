@@ -171,7 +171,7 @@ window.addEventListener('resize', changeOrient, false);
         <div id="animStepIntro">
             <script>
 
-                var d3DataURL="php/countryJSONObj.php";
+                var d3DataURL="assets/world.json";
                 var svgWorldURL="assets/groupedWorld.svg";
                 var prepped=[{"d3Data":false,"svgWorld":false}];
                 function doNext() {
@@ -233,12 +233,12 @@ window.addEventListener('resize', changeOrient, false);
                 };
                 function checkAvailable(which, hasFunc) {
                     var isReady=true;
-                    if(!localStorage[which]){
+                //    if(!localStorage[which]){
                         doThenStore(which, hasFunc);
                         isReady=false;
-                    }else{
-                        prepped[which]=true;
-                    }
+                  //  }else{
+                      //  prepped[which]=true;
+                    //}
                     return isReady;
                 };
                 function canStore() {

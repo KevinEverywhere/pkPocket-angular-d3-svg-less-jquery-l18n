@@ -304,6 +304,7 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 							MapService.userActivated=true;
 							try{
 								console.log("theID=" + this.currentCountryObj)
+
 					//			if(this.getCountry(theID) != null && (this.currentCountryObj!=this.getCountry(theID))){
 									if(this.currentCountryObj !=null){
 										console.log("this.currentCountryObj")
@@ -311,8 +312,10 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 									}
 					//			}
 								this.bindCountryObject(whichCountry, "incrSelected",  whichEl);
-								MapService.getCountryData(this.currentCountryObj.CountryID);
-								$rootScope.$broadcast("countrySelected",{Country:this.currentCountryObj});
+								MapService.getCountryData(whichCountry.CountryID);
+								$rootScope.$broadcast("countrySelected",{Country:whichCountry});
+				//				MapService.getCountryData(this.currentCountryObj.CountryID);
+				//				$rootScope.$broadcast("countrySelected",{Country:this.currentCountryObj});
 							}catch(oops){
 							console.log('noBueno');
 							}
@@ -335,15 +338,10 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					this.highlightCountry(this.currentCountryObj);
 				},
 				svgCallClickThrough:function(evt){
-					console.log(evt.target.parentNode.id + " is at .svgCallClickThrough=" + evt.target + 'svgCall=' + evt);
-					// 
-					$window.myObj=this.fromCountryCode(evt.target.parentNode.id);
-					if(evt.target.parentNode.id == "worldDiv"){
-						console.log("svgCall=No Country=" + evt.target.id);
-					}else{
-						console.log("svgCall=" + this.fromCountryCode(evt.target.parentNode.id).CountryName);
+					try{
+						this.setCountry(this.fromCountryCode(evt.target.parentNode.id), evt.target.parentNode);
+					}catch(oops){
 					}
-					this.setCountry(this.fromCountryCode(evt.target.parentNode.id), evt.target.parentNode);
 					this.svgClicked=false;
 				},
 				svgCallDoubleClick:function(evt){

@@ -10,7 +10,7 @@ masterMapApp
 		 		wikiURLOpen:"http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=",
 		 		wikiURLClose:"?callback=JSON_CALLBACK",
 		 		wikiURL:function(what){
-		 			return this.wikiURLOpen  + what;
+		 			return this.wikiURLOpen  + what + wikiURLClose;
 		 //			return this._wikiURL  + what;
 		 		},
 

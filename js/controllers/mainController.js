@@ -12,9 +12,9 @@ masterMapApp.controller('MainCtrl',
 		}
  		$rootScope.$on('countrySelected',function(obj){
  			var a="", b=obj.targetScope;
- 			for(var c in b){
- 				a+=c+":" + b[c] +"; "; 
- 			}
+// 			for(var c in b){
+ //				a+=c+":" + b[c] +"; "; 
+ 	//		}
 			$scope.countryName="";
 			console.log('obj.Country. a=' + a); // .Country.CountryID);
 	//		MapService.getCountryData(obj.Country.CountryID);

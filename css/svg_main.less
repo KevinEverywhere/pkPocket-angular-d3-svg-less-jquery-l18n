@@ -253,7 +253,7 @@ div.padded{
 	padding:.5em .5em;
 	background-image:
 		linear-gradient(
-		@foreColor 70%, 
+		@foreColor 90%, 
 		@foreColor * .75, 
 		@foreColor * .5, 
 		@foreColor * .25, 
@@ -270,7 +270,7 @@ div.padded{
 	/* background-color:@foreColor; */
 	background-image:
 		linear-gradient(
-		@foreColor 50%, 
+		@foreColor 80%, 
 		@foreColor * .75, 
 		@foreColor * .5, 
 		@foreColor * .25, 
@@ -288,7 +288,7 @@ div.padded{
 	/* background-color:@foreColor; */
 	background-image:
 		linear-gradient(
-		@foreColor 7 0%, 
+		@foreColor 70%, 
 		@foreColor * .75, 
 		@foreColor * .5, 
 		@foreColor * .25, 
@@ -425,7 +425,7 @@ div.padded{
 	.expandedSmall{
 		position:relative;
 		float:left;
-	    height:7.5em;
+	    min-height:7.5em;
 	    -webkit-animation: expand .25s;
 	}
 	.collapsableSmall{
@@ -458,26 +458,6 @@ div.padded{
 		float:left;
 		position:relative;
 	}
-	#theWorld{
-		position:relative;
-		top:-2em;
-		left:-2em;
-		.transformSVG(.95);
-	}
-
-	.worldDiv{
-		background-color:@isWhite;
-	/*		background-image:url('../assets/worldBG.jpg');	*/
-		position:absolute;
-		top:0em;
-		left:0em;
-		z-index:992;
-		width:70em;
-		height:32.25em;
-		opacity:0,
-		overflow:hidden;
-	}
-
 	.WorldMapController{
 		-webkit-transform: scale(.5);
 		-moz-transform: scale(.5);
@@ -643,19 +623,6 @@ div.padded{
 		cursor:pointer;
 		overflow:hidden;
 	}
-
-	.worldDiv{
-		background-color:#000;
-		background-image:url('../assets/worldBG.jpg');
-		position:absolute;
-		top:0px;
-		left:0px;
-		z-index:992;
-		width:1080px;
-		height:460px;
-		opacity:0,
-		overflow:hidden;
-	}
 	#main{
 		#bareBones > .main;
 	}
@@ -665,6 +632,25 @@ span, input{
 }
 input{
 	width:50%;
+}
+
+#theWorld{
+	position:relative;
+	top:-2em;
+	left:-2em;
+	.transformSVG(.95);
+}
+
+.worldDiv{
+	background-color:@isWhite;
+	position:absolute;
+	top:0em;
+	left:0em;
+	z-index:992;
+	width:70em;
+	height:32.25em;
+	opacity:0,
+	overflow:hidden;
 }
 
 

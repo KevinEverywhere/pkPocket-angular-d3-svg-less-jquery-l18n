@@ -5,25 +5,21 @@ masterMapApp
 		 function($rootScope, $http, $q, $state, $window) {
 		 	var service={
 		 		displayText:'',
-		 		wikipediaURL:"php/currencyURL.php",
-		 		_wikiURL:"php/src.php?src=wiki&wiki=",
 		 		wikiURLOpen:"http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=",
-		 		wikiURLClose:"?callback=JSON_CALLBACK",
+		 		wikiURLClose:"&callback=JSON_CALLBACK",
 		 		wikiURL:function(what){
-		 			return this.wikiURLOpen  + what + wikiURLClose;
-		 //			return this._wikiURL  + what;
+		 			return this.wikiURLOpen  + what + this.wikiURLClose;
 		 		},
-
-
-		 		getWikiInfo:function(onWhat){
+		 		getWikiInfo:function(onWhat, whichScope){
 		 			var me=this;
+					console.log("getWikiInfo on " + this.wikiURL(onWhat));
 				 	$http.jsonp(this.wikiURL(onWhat))
-						.success(function(data, status, headers, config) {
-							var obj=JSON.parse(data);
-							console.log("getWikiInfo=; ...");
-							$window.wikipedia=obj;
-							console.log("data.query="  + obj.query);
-							me.displayText="obj.query=" + obj.query;
+						.success(function(data) {
+							//	This code is written to reduce the size of the wikipedia data.
+							// 	A smaller dataset from Wikipedia or other URL would help.
+							var piece="",_content="",_title="",o={}, y=data.query.pages;for(var z in y){o=y[z]};_title=o.title;_content=o.revisions[0]["*"];
+							_content=_content.substring(_content.indexOf("'''"), _content.indexOf("==Etymology=="));
+							whichScope.displayText=_content;
 						})
 						.error(function(data, status, headers, config) {
 							console.log("ERROR=" + data)
@@ -35,14 +31,23 @@ masterMapApp
 .controller('WikipediaCtrl', 
 	["$scope", "$rootScope", "$http", "$stateParams", "WikipediaService", "$window",
 	function WikipediaCtrl($scope, $rootScope, $http, $stateParams, WikipediaService, $window) {
-		var _WikipediaService=WikipediaService;
 		$rootScope.$on('countrySelected', function (event, data) {
-			console.log('WikipediaCtrl.countrySelected...')
-			try{
-				_WikipediaService.getWikiInfo(data.Country.CountryName);
-			}catch(oops){
-				console.log("bad data=" + data);
-			}
+			WikipediaService.getWikiInfo(data.Country.CountryName, $scope);
 		});
 	}
 ]);
+
+function spy(haystack, thing){
+	var rtn=null,num=0;
+	for(var needle in haystack){
+		num++;
+		if(needle==thing){
+			rtn=haystack[needle];
+		}
+	}
+	if(rtn==null){
+		if(num==0){
+			return spy()
+		}
+	}
+}

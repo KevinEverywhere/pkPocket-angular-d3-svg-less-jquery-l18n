@@ -291,7 +291,7 @@ window.addEventListener('resize', changeOrient, false);
                 <div ng-show="isLoaded==true" id="container" class="container">
                     <div id="firstGroup">
                         <div id="svgMap" ng-show="$rootScope.svgToggle==true" ng-include src="'views/svg-map.html'"></div>
-                        <div id="countryMapHolder" ng-init="countryToggle=true" class="holder {{countryToggle==true ? 'expanded' : 'collapsed'}}">
+                        <div ng-init="countryToggle=true" class="holder {{countryToggle==true ? 'expanded' : 'collapsed'}}">
                             <div class="toggler" class='countryMap' id="googleMapHeader">
                                 <span ng-click="countryToggle=!countryToggle">
                                     {{'locale' | i18nObj:'_CountryToggle_'}}
@@ -310,31 +310,31 @@ window.addEventListener('resize', changeOrient, false);
                         </div>
                     </div>
                     <div id="secondGroup">
-                        <div id="weatherHolder" ng-init="$rootScope.weatherToggle=false" class="holder {{$rootScope.weatherToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                            <div class="toggler" ng-click="$rootScope.weatherToggle=!$rootScope.weatherToggle" id="weatherHeader">{{'locale' | i18nObj:'_WeatherToggle_'}}</div>
-                            <div class="collapsableSmall" ng-show="$rootScope.weatherToggle==true" id="weatherView" ng-include src="'views/weatherView.html'"></div>
+                        <div ng-init="$rootScope.weatherToggle=false" class="holder {{$rootScope.weatherToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="$rootScope.weatherToggle=!$rootScope.weatherToggle">{{'locale' | i18nObj:'_WeatherToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="$rootScope.weatherToggle==true" ng-include src="'views/weatherView.html'"></div>
                         </div>
-                        <div id="travelHolder" class="holder {{travelToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                            <div class="toggler" ng-click="travelToggle=!travelToggle" id="travelHeader">{{'locale' | i18nObj:'_TravelToggle_'}}</div>
-                            <div class="collapsableSmall" ng-show="travelToggle==true" id="travelView" ng-include src="'views/travelView.html'"></div>
+                        <div class="holder {{travelToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="travelToggle=!travelToggle">{{'locale' | i18nObj:'_TravelToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="travelToggle==true" ng-include src="'views/travelView.html'"></div>
                         </div>
-                        <div id="wikipediaHolder" class="holder {{wikipediaToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                        <div class="holder {{wikipediaToggle==true ? 'expandedSmall' : 'collapsed'}}">
                             <div class="toggler" ng-click="wikipediaToggle=!wikipediaToggle" id="wikipediaHeader">{{'locale' | i18nObj:'_WikipediaToggle_'}}</div>
                             <div class="collapsableSmall" ng-show="wikipediaToggle==true" id="wikipediaView" ng-include src="'views/wikipediaView.html'"></div>
                         </div>
-                        <div id="currencyHolder" class="holder {{currencyToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                            <div class="toggler" ng-click="currencyToggle=!currencyToggle" id="currencyHeader">{{'locale' | i18nObj:'_CurrencyToggle_'}}</div>
-                            <div class="collapsableSmall" ng-show="currencyToggle==true" id="currencyView" ng-include src="'views/currencyView.html'"></div>
+                        <div class="holder {{currencyToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="currencyToggle=!currencyToggle">{{'locale' | i18nObj:'_CurrencyToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="currencyToggle==true" ng-include src="'views/currencyView.html'"></div>
                         </div>
                         <div ng-init="adToggle=true" id="adHolder" class="holder {{adToggle==true ? 'expanded' : 'collapsed'}}">
-                            <div class="toggler" ng-click="adToggle=!adToggle" id="adHeader">{{'locale' | i18nObj:'_AboutToggle_'}}</div>
-                            <div class="collapsableSmall" ng-show="adToggle==true" id="adView" ng-include src="'views/adView.html'"></div>
+                            <div class="toggler" ng-click="adToggle=!adToggle">{{'locale' | i18nObj:'_AboutToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="adToggle==true" ng-include src="'views/adView.html'"></div>
                         </div>
                     </div>
                 </div>
                 <div id="pageBottom" class="pageBottom">
                     <div class="rightFloater">{{'locale' | i18nObj:'_Footer_'}}</div>
-                    <div class="leftFloater">
+                    <div>
                         <div id="translateHolder" ng-include src="'views/translateView.html'"></div>
                     </div>
                     </div>

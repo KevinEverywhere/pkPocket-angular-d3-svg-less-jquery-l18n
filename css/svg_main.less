@@ -236,7 +236,7 @@ div.padded{
 	font:@MidFONT;
 	color:@bgColor;
 }
-.tempFullClass, .tempClassFull{
+.tempClassFull{
 	float:left;
 	min-height:@HalfW;
 	font:@MidFONT;
@@ -244,22 +244,6 @@ div.padded{
 	padding:0em;
 	background-color:@foreColor;
 	width:@_SmallW;
-}
-.tempClassBig{
-	float:left;
-	height:10.0em;
-	font:@MidFONT;
-	color:@bgColor;
-	padding:.5em .5em;
-	background-image:
-		linear-gradient(
-		@foreColor 90%, 
-		@foreColor * .75, 
-		@foreColor * .5, 
-		@foreColor * .25, 
-		@bgColor 
-	);
-	width:100%;
 }
 .collapsedTempClass{
 	float:left;
@@ -441,16 +425,6 @@ div.padded{
 		overflow:hidden;
 	}
 
-	.MapController{
-		position: relative;
-		float:left;
-	}
-
-	.SVGController{
-		position: relative;
-		float:left;
-	}
-
 	#svgMap{
 		height:@_SmallH;
 		width:@_SmallW;
@@ -537,16 +511,6 @@ div.padded{
 		overflow:hidden;
 	}
 
-	.MapController{
-		position: relative;
-		float:left;
-	}
-
-	.SVGController{
-		position: relative;
-		float:left;
-	}
-
 	#svgMap{
 		height:@_SmallH;
 		width:@_SmallW;
@@ -577,18 +541,6 @@ div.padded{
 		float:left;
 		font:@FONT;
 		background-color:@bgColor;
-	}
-
-	#weatherView{
-	}
-
-	#wikipediaView{
-	}
-
-	#currencyView{
-	}
-
-	#travelView{
 	}
 
 	#worldMap{
@@ -627,10 +579,11 @@ div.padded{
 		#bareBones > .main;
 	}
 }
+
 span, input{
 	font:@MidFONT;
 }
-input{
+input .countryName{
 	width:50%;
 }
 
@@ -776,20 +729,6 @@ leftFloater{
 
 @base: #f938ab;
 
-.box-shadow(@style, @c) when (iscolor(@c)) {
-  -webkit-box-shadow: @style @c;
-  box-shadow:         @style @c;
-}
-
-.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
-  .box-shadow(@style, rgba(0, 0, 0, @alpha));
-}
-.box {
-  color: saturate(@base, 5%);
-  border-color: lighten(@base, 30%);
-  div { .box-shadow(0 0 5px, 30%) }
-}
-
 body {
 	#bareBones > .cover;
 	background-color: @bgColor;
@@ -830,7 +769,6 @@ a{
 }
 
 
-/* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -838,20 +776,9 @@ a{
   padding-bottom: 1.1875em;
 }
 
-/* Custom page footer */
 .footer {
 	color: @foreColor;
 	font-weight:700;
 	text-align:right;
 	border-top: 1px solid @foreColor;
 }
-
-
-@media (max-width: 960px), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-    /* handheld device, not tablet */
-}
-
-@media (max-width: 2048px), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-    /* tablet-sized device with doubled pixel */
-}
-

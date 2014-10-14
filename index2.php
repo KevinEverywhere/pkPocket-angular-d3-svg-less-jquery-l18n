@@ -233,12 +233,12 @@ window.addEventListener('resize', changeOrient, false);
                 };
                 function checkAvailable(which, hasFunc) {
                     var isReady=true;
-                //    if(!localStorage[which]){
+                    if(!localStorage[which]){
                         doThenStore(which, hasFunc);
                         isReady=false;
-                  //  }else{
-                      //  prepped[which]=true;
-                    //}
+                    }else{
+                        prepped[which]=true;
+                    }
                     return isReady;
                 };
                 function canStore() {
@@ -304,9 +304,6 @@ window.addEventListener('resize', changeOrient, false);
                                 </span>
                             </div>
                             <div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? '' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                            <!-- div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? 'tempClass' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                            <div class="{{$rootScope.svgToggle==true ? 'tempClass' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                            <div class="{{countrySelected==true ? '' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div -->
                         </div>
                     </div>
                     <div id="secondGroup">

@@ -10,15 +10,23 @@ masterMapApp.controller('MainCtrl',
 			MapService.getCountryData(cID);
 			$rootScope.$broadcast("countrySelected",{Country:$rootScope.countries[cID]});
 		}
- 		$rootScope.$on('countrySelected',function(obj){
- 			var a="", b=obj.targetScope;
+ 		$scope.$on('countrySelected',function(){
+			$scope.countryName="";
+		});
+ 		$rootScope.$on('countrySelected',function(evt, obj){
+ 		//	var a="", b=obj.targetScope;
+			console.log('obj.Country.CountryID=' + obj.Country.CountryID); // .Country.CountryID);
+			MapService.getCountryData(obj.Country.CountryID);
+ 			D3Service.swapHighlights(obj);
+
+
 // 			for(var c in b){
  //				a+=c+":" + b[c] +"; "; 
  	//		}
-			$scope.countryName="";
-			console.log('obj.Country. a=' + a); // .Country.CountryID);
+		//	$scope.countryName="";
 	//		MapService.getCountryData(obj.Country.CountryID);
 		//	$scope.$broadcast("countrySelected");
+			$scope.$broadcast("countrySelected");
  		});
 		if($rootScope.countries.length==0){
 			MapService.init($scope);

@@ -224,10 +224,13 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					d3.select(whichEl).attr(whichProp,whichVal);
 				},
 				getCountry:function(whichCountry){
+					$window.whichCountry=whichCountry;
+					console.log("getCountry:function(" + whichCountry)
 					var zz=null;
 					for(var z in this.d3Data.world.countries){
 						try{
-							if(whichCountry.indexOf(this.d3Data.world.countries[z].GeoObject)!=-1){
+							if(this.d3Data.world.countries[z].GeoObject && whichCountry.GeoObject
+							 && whichCountry.GeoObject.indexOf(this.d3Data.world.countries[z].GeoObject)!=-1){
 								zz=this.d3Data.world.countries[z];
 								break;
 							}
@@ -237,8 +240,8 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 						for(var z in this.d3Data.world.countries){
 							try{
 								if(
-								(whichCountry.indexOf(this.d3Data.world.countries[z].CountryName)!=-1) ||
-								(whichCountry.indexOf(this.d3Data.world.countries[z]._name())!=-1)
+								(whichCountry.CountryName.indexOf(this.d3Data.world.countries[z].CountryName)==0) ||
+								(whichCountry.CountryName.indexOf(this.d3Data.world.countries[z]._name())==0)
 								){
 									zz=this.d3Data.world.countries[z];
 									break;
@@ -246,54 +249,28 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 							}catch(oops){}
 						}
 					}
-					if(zz==null){
-						switch(whichCountry.toLowerCase()){
-							case "congo democratic republic of the":
-								zz=this.getCountry("democraticRepublicOfCongo");
-								break;
-							case "congo republic of the":
-								zz=this.getCountry("republicOfCongo");
-								break;
-							case "cote d'ivoire":
-								zz=this.getCountry("coteDIvoire");
-								break;
-							case "serbia and montenegro":
-								zz=this.getCountry("serbia");
-								break;
-							case "bosnia and herzegovina":
-								zz=this.getCountry("bosnia");
-								break;
-							case "central african republic":
-								zz=this.getCountry("centralAfricanRepublic");
-								break;
-							case "nigeria":
-								zz=this.getCountry("nigeria");
-								break;
-							case "romania":
-								zz=this.getCountry("romania");
-								break;
-							case "somalia":
-								zz=this.getCountry("somalia");
-								break;
-							case "usa":
-								zz=this.getCountry("unitedStates");
-								break;
-							default:
-								break
-						}
-					}
+
 					return zz;
  				},
 				swapHighlights:function(whichCountry){
+					console.log("swapHighlights:function(" + whichCountry);
 					this.bindCountryObject(this.getCountry(whichCountry));
  				},
 				highlightCountry:function(whichCountry){
-					console.log("highlightCountry:function(" + whichCountry)
-					d3.select("#" + whichCountry.Code).attr('opacity',0.1)
+					try{
+						console.log("highlightCountry:function(" + whichCountry)
+						d3.select("#" + whichCountry.Code).attr('opacity',0.1)
+					}catch(oops){
+						console.log("country highlight failed");
+					}
  				},
 				unhighlightCountry:function(whichCountry){
-					console.log("UN HLCountry:function(" + whichCountry)
-					d3.select("#" + whichCountry.Code).attr('opacity',1)
+					try{
+						console.log("UN HLCountry:function(" + whichCountry)
+						d3.select("#" + whichCountry.Code).attr('opacity',1)
+					}catch(oops){
+						console.log("no country to unhighlight");
+					}
  				},
 				setCountry:function(whichCountry, whichEl){
 					console.log("whichCountry.code="+ whichCountry.Code);
@@ -311,8 +288,6 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 										this.currentCountryObj.updateSelectShading();
 									}
 					//			}
-								this.bindCountryObject(whichCountry, "incrSelected",  whichEl);
-								MapService.getCountryData(whichCountry.CountryID);
 								$rootScope.$broadcast("countrySelected",{Country:whichCountry});
 				//				MapService.getCountryData(this.currentCountryObj.CountryID);
 				//				$rootScope.$broadcast("countrySelected",{Country:this.currentCountryObj});

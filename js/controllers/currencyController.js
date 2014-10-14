@@ -46,45 +46,21 @@ masterMapApp
 		 			this.currentCountry=whichCountry;
 		 			this.currentCurrency=whichCurrency;
 		 			this.currentCurrencyName=whichName;
-		 	//		if(this.primaryInstruments[whichCurrency]){
-			 			if(this.currentPreferred==whichCurrency){
-			 //				this.getExchangeRate(
-			 	//				this.getAnyInstrument(whichCurrency)[0], 
-			 	//				this.getAnyInstrument(whichCurrency)[1]);
-			 	//		}else{
-			 				this.getExchangeRate(this.currentPreferred, whichCurrency=="USD" ? "EUR" : "USD");
-			 	//		}
-
+		 			if(this.currentPreferred==whichCurrency){
+		 				this.getExchangeRate(this.currentPreferred, whichCurrency=="USD" ? "EUR" : "USD");
 		 			}else{
-			 //			if(this.instruments[whichCurrency]){
-			 				this.getExchangeRate(this.currentPreferred, whichCurrency);
-			 	//		}else{
-				// 			if(this.getAnyInstrument(whichCurrency).length>0){
-				 //				this.getExchangeRate(this.getAnyInstrument(whichCurrency)[0], this.getAnyInstrument(whichCurrency)[1]);
-				 //			}else{
-				 	//			this.getExchangeRate(this.currentPreferred, whichCurrency); // this.unavailableExchangeRate(whichCurrency);
-				 	//		}
-			 		//	}
-		 			}
+		 				this.getExchangeRate(this.currentPreferred, whichCurrency);
+					}
 		 		},
 		 		getExchangeRate:function(cur1, cur2, orOther){
 		 			var me=this, _orOther=orOther, _cur1=cur1;
-		 			console.log("orOther=" + orOther);
-	 				$http.get(this.exchangeURL(cur1, cur2)).
-						success(function(data, status, headers, config) {
-							console.log("getExchangeRate succeed");
+	 				$http
+	 					.get(this.exchangeURL(cur1, cur2))
+						.success(function(data, status, headers, config) {
 							me.availableExchangeRate(data);
-						}).
-						error(function(data, status, headers, config) {
-							console.log(me.getAnyInstrument(_cur1)[0] + " AND " + me.getAnyInstrument(_cur1)[1] + " failed.");
-						//	if(orOther){
-						//	console.log("TRYIING... " + me.getAnyInstrument(_orOther)[0] + " AND " + me.getAnyInstrument(_orOther)[1]);
-						//		me.getExchangeRate(me.getAnyInstrument(_orOther)[0]), 
-						//		me.getExchangeRate(me.getAnyInstrument(_orOther)[1]);
-						//	}else{
-								console.log("getExchangeRate fail");
-								me.unavailableExchangeRate()
-						//	}
+						})
+						.error(function(data, status, headers, config) {
+							me.unavailableExchangeRate()
 						});
 		 		},
 		 		getAnyInstrument:function(whichCurrency){

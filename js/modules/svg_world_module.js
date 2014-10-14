@@ -276,26 +276,14 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					console.log("whichCountry.code="+ whichCountry.Code);
 					if(this.currentCountryObj== null ||  whichCountry!= this.currentCountryObj){
 						console.log("inner.TS="+ whichCountry.CountryName + ";whichEl=" + whichEl);
-			//			var theID= $(whichCountry).attr('id') ? $(whichCountry).attr('id') : (whichCountry.context ? whichCountry.context.href.baseVal : null); 
-			//			if(theID != null){
-							MapService.userActivated=true;
-							try{
-								console.log("theID=" + this.currentCountryObj)
-
-					//			if(this.getCountry(theID) != null && (this.currentCountryObj!=this.getCountry(theID))){
-									if(this.currentCountryObj !=null){
-										console.log("this.currentCountryObj")
-										this.currentCountryObj.updateSelectShading();
-									}
-					//			}
-								$rootScope.$broadcast("countrySelected",{Country:whichCountry});
-				//				MapService.getCountryData(this.currentCountryObj.CountryID);
-				//				$rootScope.$broadcast("countrySelected",{Country:this.currentCountryObj});
-							}catch(oops){
-							console.log('noBueno');
-							}
+						MapService.userActivated=true;
+						try{
+							$rootScope.$broadcast("countrySelected",{Country:whichCountry});
+							console.log("this is a success currentCountryObj");
+						}catch(oops){
+							console.log('notBueno');
 						}
-			//		}
+					}
 				},
 				bindCountryObject:function(obj, func, whichEl){
 					if(this.currentCountryObj){

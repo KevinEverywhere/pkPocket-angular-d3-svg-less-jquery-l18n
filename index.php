@@ -15,7 +15,7 @@
 
 <script src='js/libs/jquery-1.9.1.min.js'></script>
 
-<link rel="stylesheet/less" type="text/css" href="css/main.less" />
+<link rel="stylesheet/less" type="text/css" href="css/svg_main.less" />
 <script>
 
 //  The angular controllers for the application are added after the rest of the page
@@ -57,7 +57,7 @@
     The resizing and orientation events affect the Less global variables, so
     all of its business logic is included together in this script element.
 */
-var svgW=1080, svgH=460, bigW, smallW, halfW, thirdW, scaleW, scaleH, padding=10,
+var svgW=1117, svgH=574, bigW, smallW, halfW, thirdW, scaleW, scaleH, padding=10,
 userAgent=navigator.userAgent,uaFont="";
 
 if(userAgent.toLowerCase().indexOf("chrome")!=-1){
@@ -155,7 +155,9 @@ window.addEventListener('resize', changeOrient, false);
 <script src="js/modules/angular-ui-router.js"></script>
 <script src="js/modules/less_ng_module.js"></script>
 <script src="js/modules/local_crud_module.js"></script>
-<script src="js/modules/d3_module.js"></script>
+<!-- 
+    script src="js/modules/d3_module.js"></script -->
+<script src="js/modules/svg_world_module.js"></script>
 <script src="js/modules/map_module.js"></script>
 <script src="js/modules/il8nObj_module.js"></script>
 <script src="js/modules/weather_module.js"></script>
@@ -169,16 +171,19 @@ window.addEventListener('resize', changeOrient, false);
         <div id="animStepIntro">
             <script>
 
-                var d3DataURL="php/countryJSONObj.php";
-                var svgWorldURL="assets/d3World.fxg.svg";
+                var d3DataURL="assets/world.json";
+                var svgWorldURL="assets/groupedWorld.svg";
                 var prepped=[{"d3Data":false,"svgWorld":false}];
                 function doNext() {
                     if(prepped["d3Data"] && prepped["svgWorld"]){
                        try{
                         console.log("app starting...");
                           document.getElementById("introDivHolder").style.visibility="hidden";
+                        console.log("app starting.1..");
                           document.getElementById("introDivHolder").style.display="none";
+                        console.log("app starting.2..");
                           angular.bootstrap(document, ['masterMapApp']);
+                        console.log("app starting..3.");
                       }catch(oops){
                         setTimeout("doNext()",1000);
                       }
@@ -286,7 +291,7 @@ window.addEventListener('resize', changeOrient, false);
                 <div ng-show="isLoaded==true" id="container" class="container">
                     <div id="firstGroup">
                         <div id="svgMap" ng-show="$rootScope.svgToggle==true" ng-include src="'views/svg-map.html'"></div>
-                        <div id="countryMapHolder" ng-init="countryToggle=true" class="holder {{countryToggle==true ? 'expanded' : 'collapsed'}}">
+                        <div ng-init="countryToggle=true" class="holder {{countryToggle==true ? 'expanded' : 'collapsed'}}">
                             <div class="toggler" class='countryMap' id="googleMapHeader">
                                 <span ng-click="countryToggle=!countryToggle">
                                     {{'locale' | i18nObj:'_CountryToggle_'}}
@@ -299,37 +304,34 @@ window.addEventListener('resize', changeOrient, false);
                                 </span>
                             </div>
                             <div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? '' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                            <!-- div class="{{countrySelected==true ? '' : ($rootScope.svgToggle==true ? 'tempClass' : 'tempClassFull')}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                            <div class="{{$rootScope.svgToggle==true ? 'tempClass' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div>
-                            <div class="{{countrySelected==true ? '' : 'tempClass'}}" id="googleMap" ui-view="googleMap">{{'locale' | i18nObj:'_CountryInfo_'}}</div -->
                         </div>
                     </div>
                     <div id="secondGroup">
-                        <div id="weatherHolder" ng-init="$rootScope.weatherToggle=false" class="holder {{$rootScope.weatherToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                            <div class="toggler" ng-click="$rootScope.weatherToggle=!$rootScope.weatherToggle" id="weatherHeader">{{'locale' | i18nObj:'_WeatherToggle_'}}</div>
-                            <div class="collapsableSmall" ng-show="$rootScope.weatherToggle==true" id="weatherView" ng-include src="'views/weatherView.html'"></div>
+                        <div ng-init="$rootScope.weatherToggle=false" class="holder {{$rootScope.weatherToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="$rootScope.weatherToggle=!$rootScope.weatherToggle">{{'locale' | i18nObj:'_WeatherToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="$rootScope.weatherToggle==true" ng-include src="'views/weatherView.html'"></div>
                         </div>
-                        <div id="travelHolder" class="holder {{travelToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                            <div class="toggler" ng-click="travelToggle=!travelToggle" id="travelHeader">{{'locale' | i18nObj:'_TravelToggle_'}}</div>
-                            <div class="collapsableSmall" ng-show="travelToggle==true" id="travelView" ng-include src="'views/travelView.html'"></div>
+                        <div class="holder {{travelToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="travelToggle=!travelToggle">{{'locale' | i18nObj:'_TravelToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="travelToggle==true" ng-include src="'views/travelView.html'"></div>
                         </div>
-                        <div id="wikipediaHolder" class="holder {{wikipediaToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                        <div class="holder {{wikipediaToggle==true ? 'expandedSmall' : 'collapsed'}}">
                             <div class="toggler" ng-click="wikipediaToggle=!wikipediaToggle" id="wikipediaHeader">{{'locale' | i18nObj:'_WikipediaToggle_'}}</div>
                             <div class="collapsableSmall" ng-show="wikipediaToggle==true" id="wikipediaView" ng-include src="'views/wikipediaView.html'"></div>
                         </div>
-                        <div id="currencyHolder" class="holder {{currencyToggle==true ? 'expandedSmall' : 'collapsed'}}">
-                            <div class="toggler" ng-click="currencyToggle=!currencyToggle" id="currencyHeader">{{'locale' | i18nObj:'_CurrencyToggle_'}}</div>
-                            <div class="collapsableSmall" ng-show="currencyToggle==true" id="currencyView" ng-include src="'views/currencyView.html'"></div>
+                        <div class="holder {{currencyToggle==true ? 'expandedSmall' : 'collapsed'}}">
+                            <div class="toggler" ng-click="currencyToggle=!currencyToggle">{{'locale' | i18nObj:'_CurrencyToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="currencyToggle==true" ng-include src="'views/currencyView.html'"></div>
                         </div>
                         <div ng-init="adToggle=true" id="adHolder" class="holder {{adToggle==true ? 'expanded' : 'collapsed'}}">
-                            <div class="toggler" ng-click="adToggle=!adToggle" id="adHeader">{{'locale' | i18nObj:'_AboutToggle_'}}</div>
-                            <div class="collapsableSmall" ng-show="adToggle==true" id="adView" ng-include src="'views/adView.html'"></div>
+                            <div class="toggler" ng-click="adToggle=!adToggle">{{'locale' | i18nObj:'_AboutToggle_'}}</div>
+                            <div class="collapsableSmall" ng-show="adToggle==true" ng-include src="'views/adView.html'"></div>
                         </div>
                     </div>
                 </div>
                 <div id="pageBottom" class="pageBottom">
                     <div class="rightFloater">{{'locale' | i18nObj:'_Footer_'}}</div>
-                    <div class="leftFloater">
+                    <div>
                         <div id="translateHolder" ng-include src="'views/translateView.html'"></div>
                     </div>
                     </div>
@@ -338,6 +340,6 @@ window.addEventListener('resize', changeOrient, false);
             </div>
         </div>
         </div>
-        <script src='js/masterMapApp.js'></script>
+        <script src='js/svgMapApp.js'></script>
     </body>
 </html>

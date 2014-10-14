@@ -14,18 +14,9 @@ masterMapApp.controller('MainCtrl',
 			$scope.countryName="";
 		});
  		$rootScope.$on('countrySelected',function(evt, obj){
- 		//	var a="", b=obj.targetScope;
-			console.log('obj.Country.CountryID=' + obj.Country.CountryID); // .Country.CountryID);
+			console.log('obj.Country.CountryID=' + obj.Country.CountryID); 
 			MapService.getCountryData(obj.Country.CountryID);
- 			D3Service.swapHighlights(obj);
-
-
-// 			for(var c in b){
- //				a+=c+":" + b[c] +"; "; 
- 	//		}
-		//	$scope.countryName="";
-	//		MapService.getCountryData(obj.Country.CountryID);
-		//	$scope.$broadcast("countrySelected");
+ 			D3Service.swapHighlights(obj.Country);
 			$scope.$broadcast("countrySelected");
  		});
 		if($rootScope.countries.length==0){

@@ -12,17 +12,12 @@ masterMapApp
 				d3World.init(d3World.defaultSVGWidth,d3World.defaultSVGHeight,"#worldDiv", "assets/groupedWorld.svg");
 			}else{
 				var _LocalCRUDService=LocalCRUDService;
-				d3World.d3Data=null; // d3.json("d3SVG");
-				console.log("svgMap-------");
+				d3World.d3Data=null; 
 				d3.json(countryURL,function(err, d){
 					if(!err){
-						console.log("assets/d3World.fxg.svg-no---ERROR---");
 						d3World.d3Data=d;
 						_LocalCRUDService.manageLocalCRUD("create",{"key":"d3Data","value":d});
-						d3World.init(d3World.defaultSVGWidth,d3World.defaultSVGHeight,"#worldDiv",
-							"assets/groupedWorld.svg");
-					}else{
-						console.log("assets/groupedWorld.svg----ERROR---");
+						d3World.init(d3World.defaultSVGWidth,d3World.defaultSVGHeight,"#worldDiv", "assets/groupedWorld.svg");
 					}
 				});
 			}

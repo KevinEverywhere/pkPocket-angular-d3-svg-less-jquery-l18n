@@ -17,15 +17,7 @@ masterMapApp
 		 		displayText:'',
 		 		countryCurrencyURL:"php/currencyURL.php",
 		 		_exchangeURL:"php/src.php?src=",
-		 		externalExchangeURL:"http://www.oanda.com/convert/classic?value=1&",
-				externalCurrencySearch:function(fromArg,ftoArg){
-					return(this. externalExchangeURL + "exch=" + fromArg + "&expr=" + toArg);
-				},
-		 		instrumentURL:"http://api-sandbox.oanda.com/v1/instruments",
-		 		// _exchangeURL:"http://api-sandbox.oanda.com/v1/prices?instruments=",
 		 		exchangeURL:function(cur1, cur2){
-		 			// http://rate-exchange.herokuapp.com/fetchRate?from=CAD&to=USD
-		 			//return this._exchangeURL + cur1 + "_" + cur2;
 		 			return this._exchangeURL  + cur1 + "," + cur2;
 		 		},
 		 		getCurrencyData:function(whichCountry){
@@ -33,14 +25,10 @@ masterMapApp
 		 			var countryName=whichCountry,me=this;
 					$http({method: 'GET', url: this.countryCurrencyURL  + "?countryName="+ countryName})
 						.success(function(data, status, headers, config) {
-							console.log("data.cur,country=" + data.currency + "; " + data.country)
 						 	me.getCurrencyText(data.currency, data.country, data.name);
 						})
 						.error(function(data, status, headers, config) {
 						});
-
-					 
-
 		 		},
 		 		getCurrencyText:function(whichCurrency, whichCountry, whichName){
 		 			this.currentCountry=whichCountry;

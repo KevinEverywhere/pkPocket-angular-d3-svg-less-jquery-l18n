@@ -10,7 +10,6 @@ masterMapApp.controller('BodyController',
 	 		$scope.currencyToggle=false;
 			$rootScope.hasOpened=true;
 	 		$rootScope.weatherToggle=false;
-	 		CurrencyService.getInstrumentsList();
 	 	}
  		$scope.$on('svgLoaded',function(){
  			$scope.isLoaded=true;

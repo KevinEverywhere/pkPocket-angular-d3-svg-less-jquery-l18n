@@ -21,9 +21,8 @@ masterMapApp
 					}
 				});
 			}
-
-	}])
-
+		}
+	])
 
 	.directive('svgMap', function () {
 		var gMapObj = {
@@ -32,8 +31,7 @@ masterMapApp
 			scope: {
 				"eventHandler": '&ngClick'
 			},
-			// templateURL: gMapService.getMap(_scope) // getMap(_scope) // 
-			template: "<div id='worldDiv' class='worldDiv' data-ng-click='mapClick(this)'></div>" //MapController.getMap(scope)
+			template: "<div id='worldDiv' class='worldDiv' data-ng-click='mapClick(this)'></div>"
 		};
 		return gMapObj;
 

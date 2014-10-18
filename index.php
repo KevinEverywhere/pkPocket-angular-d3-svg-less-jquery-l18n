@@ -145,7 +145,6 @@ window.addEventListener('resize', changeOrient, false);
 </script>
 
 <script src="js/libs/less-1.7.0.min.js"></script>
-<!-- script type="text/javascript" src="http://developer.oanda.com/oandajs/oanda.js"></script -->
 <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
 <script src='js/libs/d3.v3.min.js'></script>
 
@@ -153,10 +152,7 @@ window.addEventListener('resize', changeOrient, false);
 <script src="js/modules/angular-animate.js"></script>
 <script src="js/modules/angular-route.js"></script>
 <script src="js/modules/angular-ui-router.js"></script>
-<script src="js/modules/less_ng_module.js"></script>
 <script src="js/modules/local_crud_module.js"></script>
-<!-- 
-    script src="js/modules/d3_module.js"></script -->
 <script src="js/modules/svg_world_module.js"></script>
 <script src="js/modules/map_module.js"></script>
 <script src="js/modules/il8nObj_module.js"></script>

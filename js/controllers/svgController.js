@@ -3,9 +3,6 @@
 masterMapApp
 	.controller('SVGController', ["$scope", "$rootScope", "$stateParams", "D3Service", "LocalCRUDService",
 		function SVGController($scope, $rootScope, $stateParams, D3Service, LocalCRUDService) {
-			var mapClick=function(whichElement){
-				console.log("SVGController.mapClick("+whichElement+")");
-			}
 			var d3World=D3Service, countryURL="assets/world.json";
 			if(LocalCRUDService.manageLocalCRUD('retrieve', 'd3Data')){
 				d3World.d3Data=LocalCRUDService.manageLocalCRUD('retrieve', 'd3Data');
@@ -34,5 +31,4 @@ masterMapApp
 			template: "<div id='worldDiv' class='worldDiv' data-ng-click='mapClick(this)'></div>"
 		};
 		return gMapObj;
-
 	});

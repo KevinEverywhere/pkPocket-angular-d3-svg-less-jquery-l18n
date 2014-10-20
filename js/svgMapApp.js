@@ -151,28 +151,6 @@ var masterMapApp=angular.module("masterMapApp",  [
 					controller: 'FooterCtrl'
 				}
 			}
-		  })
-		  .state('contact', {
-			url: '/contact/',
-			views:{
-				/*
-				"navBar":{
-					templateUrl: 'views/navigation.html',
-					controller: 'NavigationCtrl'
-				},
-				*/
-				"googleMap":{
-					templateUrl: 'views/google-world-map.html',	controller: 'WorldMapController'
-				},
-				"main":{
-					templateUrl: 'views/contact.html',
-					controller: 'ContactCtrl'
-				},
-				"pageBottom":{
-					templateUrl: 'views/footer.html',
-					controller: 'FooterCtrl'
-				}
-			}
 		  });
       return $stateProvider;
     });

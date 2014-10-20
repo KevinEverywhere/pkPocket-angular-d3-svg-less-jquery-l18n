@@ -1,9 +1,8 @@
 <div ng-controller="WikipediaCtrl" id="wikipedia" class="skiptranslate collapsedTempClass wikipedia">
-	<!-- {{'locale' | i18nObj:'_CurrencyHeading_'}} -->
-		<div ng-show="displayText!=''" class="skiptranslate tempClassInner">
-			{{displayText}}
-		</div>
-		<div ng-show="displayText==''" class="skiptranslate tempClassInner">
-			{{'locale' | i18nObj:'_WikipediaTemp_'}}
-		</div>
+	<div ng-show="displayText!=''" class="skiptranslate tempClassInner">
+		{{displayText}}
+	</div>
+	<div ng-show="displayText==''" class="skiptranslate tempClassInner">
+		{{'locale' | i18nObj:'_WikipediaTemp_'}}
+	</div>
 </div>

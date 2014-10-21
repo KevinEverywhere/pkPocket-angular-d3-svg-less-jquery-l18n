@@ -27,9 +27,6 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 				svgURL:"assets/groupedWorld.svg",
 				d3Data:null,
 				inited:false,
-				scream:function(what){
-					console.log("SCREAM=" + what);
-				},
 				initSVG:function(_width, _height, targetContainer, contentAddress){
 					this._width=_width;
 					this._height=_height;

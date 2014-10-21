@@ -10,11 +10,6 @@ var mapModule = angular.module('mapModule', [])
 				locationDetermined:false,
 				isInited:false,
 				countriesURL:"assets/world.json",
-				scream:function(what){
-					console.log("SCREAM=" + what);
-				},
-				askToDetermineLocation:function(){
-				},
 				getCountryFromName:function(which, prop){
 					var _which=null;
 					if ($rootScope.countries.length>1){
@@ -91,27 +86,21 @@ var mapModule = angular.module('mapModule', [])
 				},
 				setCurrentLocation:function(position){
 					if(this.currentLocation!=true){
-					  var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-					  var mapOptions = {
-					    zoom: 15,
-					    center: latlng,
-					    mapTypeControl: false,
-					    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
-					    mapTypeId: google.maps.MapTypeId.ROADMAP
-					  };
-					try{
-						$rootScope.map.setOptions(mapOptions);
-					}catch(oops){
+						var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+						var mapOptions = {
+							zoom: 15,
+							center: latlng,
+							mapTypeControl: false,
+							navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+							mapTypeId: google.maps.MapTypeId.ROADMAP
+						};
 						try{
-							$rootScope.map=new google.maps.Map(document.getElementById("countryMap"), mapOptions);
+							$rootScope.map.setOptions(mapOptions);
 						}catch(oops){
-							console.log("element not ready")
-							$rootScope.map=new google.maps.Map(document.getElementById("countryMap"), mapOptions);
+							try{
+								$rootScope.map=new google.maps.Map(document.getElementById("countryMap"), mapOptions);
+							}catch(oops){}
 						}
-		//				 	alert("NO CURRENT COUNTRY(" + whichCountry + "; $window.navigator.userAgent=" + $window.navigator.userAgent);
-					}
-					}else{
-						console.log("Set Current Location");
 					}
 				},
 				setCurrentCountry:function(toWhich){
@@ -137,7 +126,6 @@ var mapModule = angular.module('mapModule', [])
 							 	me.centerCurrentCountry(_mapOptions);
 							})
 							.error(function(data, status, headers, config) {
-								console.log('error=' + data);
 							});
 						}else{
 							if (navigator.geolocation) {
@@ -146,8 +134,6 @@ var mapModule = angular.module('mapModule', [])
 							  }, function(error){
 								  console.log(arguments);
 								});
-							} else {
-							  error('not supported');
 							}
 						}
 					}else{

@@ -12,8 +12,7 @@ masterMapApp
 		 		},
 		 		getWikiInfo:function(onWhat, whichScope){
 		 			var me=this;
-					console.log("getWikiInfo on " + this.wikiURL(onWhat));
-				 	$http.jsonp(this.wikiURL(onWhat))
+					$http.jsonp(this.wikiURL(onWhat))
 						.success(function(data) {
 							//	This code is written to reduce the size of the wikipedia data.
 							// 	A smaller dataset from Wikipedia or other URL would help.
@@ -21,9 +20,7 @@ masterMapApp
 							_content=_content.substring(_content.indexOf("'''"), _content.indexOf("==Etymology=="));
 							whichScope.displayText=_content;
 						})
-						.error(function(data, status, headers, config) {
-							console.log("ERROR=" + data)
-						});
+						.error(function(data, status, headers, config) {});
 		 		}
 			 }
 		return service;	
@@ -36,18 +33,3 @@ masterMapApp
 		});
 	}
 ]);
-
-function spy(haystack, thing){
-	var rtn=null,num=0;
-	for(var needle in haystack){
-		num++;
-		if(needle==thing){
-			rtn=haystack[needle];
-		}
-	}
-	if(rtn==null){
-		if(num==0){
-			return spy()
-		}
-	}
-}

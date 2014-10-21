@@ -12,7 +12,7 @@ var weatherModule = angular.module('weatherModule', [])
 					return this.wuAPI + this.wuKey + "/geolookup/conditions/forecast/q/" + what + ".json" + "?callback=JSON_CALLBACK";
 				},
 				getInterest:function(){
-					return ($rootScope.weatherToggle);
+					return ($rootScope.isInterested);
 				},
 				weatherLookups:[],
 				currentLookup:-1,
@@ -38,18 +38,14 @@ var weatherModule = angular.module('weatherModule', [])
 								}
 						 		$rootScope.$broadcast("weatherUpdate",scope);
 					 		}catch(oops){
-					 			console.log('bad weather scopage');
+
 					 		}
 					 		$window.weather=data;
-					 		console.log("weather=" + data);
 					 	})
-					 	.error(function(data, status, headers, config) {
-					 		console.log("weather.error=" + data);
-					 	})
+					 	.error(function(data, status, headers, config) {})
 					}
 				},
 				testLookupWeather:function(){
-					//
 				},
 				init:function(objToLookup){
 			//		var countriesURL="../countryJSONObj.php";

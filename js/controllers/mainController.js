@@ -14,17 +14,14 @@ masterMapApp.controller('MainCtrl',
 			$scope.countryName="";
 		});
  		$rootScope.$on('countrySelected',function(evt, obj){
-			console.log('obj.Country.CountryID=' + obj.Country.CountryID); 
 			MapService.getCountryData(obj.Country.CountryID);
  			D3Service.swapHighlights(obj.Country);
 			$scope.$broadcast("countrySelected");
  		});
 		if($rootScope.countries.length==0){
 			MapService.init($scope);
-		//	D3Service.init($scope);
 		}else{
 			if($stateParams.CountryID){
-				console.log('MainCtrl.MapService.setCountry=' +  $stateParams.CountryID)
 				MapService.getCountryData($stateParams.CountryID);
 				$rootScope.$broadcast("countrySelected",{Country:$rootScope.countries[$stateParams.CountryID]});
 			}

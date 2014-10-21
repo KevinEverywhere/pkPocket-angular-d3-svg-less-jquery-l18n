@@ -1,7 +1,6 @@
 'use strict';
 
 var svgWorldModule = angular.module('svgWorldModule', [])
-//		.service('svgWorldService', ["$window", "$rootScope", "$http", "$q", "$state", "MapService", "LocalCRUDService",
 		.service('D3Service', ["$window", "$rootScope", "$http", "$q", "$state", "MapService", "LocalCRUDService",
 		 function($window, $rootScope, $http, $q, $state, MapService, LocalCRUDService) {
 			var jsonURL="assets/world.json"; //"countryJSONObj.php";
@@ -37,53 +36,11 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 				},
 				createCountryObject:function(obj, svg, whichEl){
 					var _this=this,countryObject={
-						selectedTimes:0,
-						visitedTimes:0,
 						parent:_this,
 						countryImg:svg, 
 						targetImg:whichEl,
-						incrSelected:function(){
-							this.selectedTimes++;
-						},
 						_name:function(){
 							return this.CountryName.replace("+"," ");
-						},
-						updateSelectShading:function(){
-							var o=Math.max(0.2,(1-(this.selectedTimes/10)));
-							$(this.countryImg).attr('opacity',o);
-						},
-						incrementCount:function(){
-							this.visitedTimes++;
-						},
-						getColor:function(){
-							var _color=null;
-							try{
-								_color=$(this.countryImg).selectAll('g').selectAll('path').attr('fill');
-							}catch(oops){
-								console.log('getColor oops='+oops);
-							}
-							return _color;
-						//	d3.select("#china").selectAll('g').selectAll('path').attr('fill','#c33');
-						},
-						setColor:function(_color, _opacity){
-							// console.log(this.CountryName + ", color=" + _color + ', opac=' + _opacity + ",this.countryImg=" + this.countryImg);
-							try{
-								$(this.countryImg).selectAll('g').selectAll('path').attr('fill',_color);
-								this.colorChildAreas(_color, _opacity);
-							}catch(oops){
-							console.log('setColor oops='+oops);
-							// d3.select("#china").selectAll('g').selectAll('path').attr('fill','#c33');
-							}
-							if(_opacity){try{$(this.countryImg).attr('opacity', _opacity);}catch(oops){}}
-						},
-						colorChildAreas:function(_color, _opacity){
-							try{
-								$(this.countryImg).selectAll("use")
-									.filter(function(){$(this.href.baseVal).
-										selectAll('g').select('path').attr('fill',_color);});
-							}catch(oops){
-								console.log('colorChildareas oops='+oops);
-							}
 						}
 					};
 					for(var z in countryObject){
@@ -127,9 +84,7 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 							d3.select("#" + this.targetContainer).node().appendChild(this.importedNode);
 							this.initWorld(true);
 							this.initCountries();
-						}catch(oops){
-							console.log("Load SVG no noBueno Try-Catch");
-						}						
+						}catch(oops){}
 					}
 	            },
 				loadSVG:function(whatURL){
@@ -141,8 +96,7 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 							this.loadSVGXML(null);
 						}else{
 		        			this.d3World=d3.xml(this.getCurrent(), "image/svg+xml",function(xml) {
-		        				console.log("xml=" + xml);
-								_LocalCRUDService.manageLocalCRUD("create",{"key":"svgWorld","value":xml},"xmlToString");
+		        				_LocalCRUDService.manageLocalCRUD("create",{"key":"svgWorld","value":xml},"xmlToString");
 								me.loadSVGXML(xml);
 							});
 						}
@@ -174,10 +128,6 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 				},
 
 				increaseScaleWorld:function(evt){
-					var y=evt;
-					for(var z in y){
-					//	console.log("increaseScaleWorld=" + z + '=' + y[z]);
-					}
 					this.scaleWorld(this.currentScale*1.5, {x:evt.clientX, y:evt.clientY});
 				},
 				scaleWorld:function(toWhatArg, offsetObj){
@@ -222,7 +172,6 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 				},
 				getCountry:function(whichCountry){
 					$window.whichCountry=whichCountry;
-					console.log("getCountry:function(" + whichCountry)
 					var zz=null;
 					for(var z in this.d3Data.world.countries){
 						try{
@@ -270,16 +219,11 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					}
  				},
 				setCountry:function(whichCountry, whichEl){
-					console.log("whichCountry.code="+ whichCountry.Code);
 					if(this.currentCountryObj== null ||  whichCountry!= this.currentCountryObj){
-						console.log("inner.TS="+ whichCountry.CountryName + ";whichEl=" + whichEl);
 						MapService.userActivated=true;
 						try{
 							$rootScope.$broadcast("countrySelected",{Country:whichCountry});
-							console.log("this is a success currentCountryObj");
-						}catch(oops){
-							console.log('notBueno');
-						}
+						}catch(oops){}
 					}
 				},
 				bindCountryObject:function(obj, func, whichEl){
@@ -305,7 +249,6 @@ var svgWorldModule = angular.module('svgWorldModule', [])
 					this.svgClicked=false;
 				},
 				svgCallDoubleClick:function(evt){
-					console.log("svgCallDoubleClick=" + evt.target + 'svgCall=' + evt);
 					this.increaseScaleWorld(evt);
 					this.svgClicked=false;
 				},

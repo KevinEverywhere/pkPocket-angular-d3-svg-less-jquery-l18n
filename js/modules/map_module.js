@@ -45,8 +45,6 @@ var mapModule = angular.module('mapModule', [])
 							}
 						})
 						this.locationDetermined=true;
-					}else{
-						console.log("end of operation");
 					}
 				},
 				centerCurrentCountry:function(_mapOptions){
@@ -78,10 +76,7 @@ var mapModule = angular.module('mapModule', [])
 					}catch(oops){
 						try{
 							$rootScope.map=new google.maps.Map(document.getElementById("countryMap"), mapOptions);
-						}catch(oops){
-							console.log("element not ready")
-							$rootScope.map=new google.maps.Map(document.getElementById("countryMap"), mapOptions);
-						}
+						}catch(oops){}
 					}
 				},
 				setCurrentLocation:function(position){
@@ -131,9 +126,7 @@ var mapModule = angular.module('mapModule', [])
 							if (navigator.geolocation) {
 							  navigator.geolocation.getCurrentPosition(function(position){
 							  	me.setCurrentLocation(position);
-							  }, function(error){
-								  console.log(arguments);
-								});
+							  }, function(error){});
 							}
 						}
 					}else{
@@ -146,15 +139,12 @@ var mapModule = angular.module('mapModule', [])
 						.success(function(data, status, headers, config) {
 							if(runOnce<1){
 								runOnce++;
-								console.log("successful init =" + data);
 								$rootScope.countries=data.world.countries;
 								$rootScope.continents=data.world.continents;
 								$rootScope.$broadcast( 'MapService.init' );
 							}
 						})
-						.error(function(data, status, headers, config) {
-							console.log('error=' + data);
-						});
+						.error(function(data, status, headers, config) {});
 				},
 				_create:function(what){
 					
@@ -167,7 +157,6 @@ var mapModule = angular.module('mapModule', [])
 			var init=function(){
 				if(!MapService.isInited){
 					if(MapService.currentCountry<0) {
-						console.log("determineLocation");
 						MapService.determineLocation();
 					}else{
 						MapService.getCountryData(MapService.currentCountry);

@@ -5,7 +5,6 @@ masterMapApp.controller('TranslateController',
 	function TranslateController($scope, $rootScope, $http, $stateParams, $window) {
 		function updateOnlineStatus(){
 			$scope.onLine=$window.navigator.onLine;
-			console.log("$scope.onLine=" + $scope.onLine);
 		}
  		$rootScope.$on('onlineStatusUpdate',function(){
 			updateOnlineStatus();

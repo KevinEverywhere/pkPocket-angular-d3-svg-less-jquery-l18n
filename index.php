@@ -90,7 +90,6 @@ function changeOrient(evt){
         "@_HalfH":(smallW * scaleW) + "px",
         "@userFont":uaFont
     });
-    console.log("$window.changeOrient");
 }    
 
 function getCurrentDimensions(){
@@ -108,7 +107,7 @@ function getCurrentDimensions(){
     }
     halfW=bigW/2;
     thirdW=bigW/3;
-    scaleW=1; // svgW/bigW;
+    scaleW=1;
 }
 
 function svgHeight(num){
@@ -173,13 +172,9 @@ window.addEventListener('resize', changeOrient, false);
                 function doNext() {
                     if(prepped["d3Data"] && prepped["svgWorld"]){
                        try{
-                        console.log("app starting...");
                           document.getElementById("introDivHolder").style.visibility="hidden";
-                        console.log("app starting.1..");
                           document.getElementById("introDivHolder").style.display="none";
-                        console.log("app starting.2..");
                           angular.bootstrap(document, ['masterMapApp']);
-                        console.log("app starting..3.");
                       }catch(oops){
                         setTimeout("doNext()",1000);
                       }
@@ -272,12 +267,9 @@ window.addEventListener('resize', changeOrient, false);
                         }
                     }
                     document.write(str);
-                    console.log(str);
                 }else{
                     document.write('<div class="noStep introDiv"><p>This content can not be seen in your device and browser combination.</p></div>')
                 }
-                /*
-                */
             </script>
         </div>
       </div>

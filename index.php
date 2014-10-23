@@ -57,7 +57,7 @@
     The resizing and orientation events affect the Less global variables, so
     all of its business logic is included together in this script element.
 */
-var svgW=1117, svgH=574, bigW, smallW, halfW, thirdW, scaleW, scaleH, padding=10,
+var svgW=1117, svgH=574, bigW, smallW, halfW, scaleW, scaleH, padding=10,
 userAgent=navigator.userAgent,uaFont="";
 
 if(userAgent.toLowerCase().indexOf("chrome")!=-1){
@@ -83,12 +83,10 @@ function changeOrient(evt){
         "@_SmallW":(smallW * scaleW)-padding + "px",
         "@_HalfW":((bigW-smallW)-padding  * scaleW) + "px",
         "@HalfW":((bigW / 2)  * scaleW) + "px",
-        "@ThirdW":((bigW / 3)  * scaleW) + "px",
-        "@QtrW":((bigW / 4)  * scaleW) + "px",
+        "@QtrW":((smallW / 3.2)  * scaleW) + "px",
         "@_BigH":(svgHeight(bigW)-padding * scaleW) + "px",
         "@_SmallH":(svgHeight(smallW)-padding * scaleW) + "px",
-        "@_HalfH":(smallW * scaleW) + "px",
-        "@userFont":uaFont
+        "@_HalfH":(smallW * scaleW) + "px"
     });
 }    
 
@@ -106,7 +104,6 @@ function getCurrentDimensions(){
         }
     }
     halfW=bigW/2;
-    thirdW=bigW/3;
     scaleW=1;
 }
 
@@ -126,8 +123,7 @@ less = {
         _SmallW:(smallW * scaleW)-padding + "px",
         _HalfW:((bigW-smallW)-padding  * scaleW) + "px",
         HalfW:((bigW / 2)  * scaleW) + "px",
-        ThirdW:((bigW / 3)  * scaleW) + "px",
-        QtrW:((bigW / 4)  * scaleW) + "px",
+        QtrW:((smallW / 3.2)  * scaleW) + "px",
         _BigH:(svgHeight(bigW)-padding * scaleW) + "px",
         _SmallH:(svgHeight(smallW)-padding * scaleW) + "px",
         _HalfH:(smallW * scaleW) + "px",

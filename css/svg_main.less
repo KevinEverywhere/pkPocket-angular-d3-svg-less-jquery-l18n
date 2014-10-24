@@ -331,6 +331,12 @@ div.padded{
 }
 
 @media screen and (min-width: 320px) and (orientation:landscape){
+	#theWorld{
+		position:relative;
+		top:-2.5em;
+		left:-2.5em;
+		.transformSVG(.95);
+	}
 	.halfSize{
 		position:absolute;
 		left:@_HalfW;
@@ -374,6 +380,8 @@ div.padded{
 		float:left;
 		width:@_HalfW;
 		display:block;
+		padding:.25em;
+		margin:.25em;
 	}
 	.toggler{
 		position:relative;
@@ -479,6 +487,12 @@ div.padded{
 }
 
 @media screen and (min-width: 320px) and (orientation:portrait){
+#theWorld{
+	position:relative;
+	top:-3em;
+	left:-3em;
+	.transformSVG(.9);
+}
 	#doesnotWork{
 		display:none;
 	}
@@ -556,6 +570,8 @@ div.padded{
 		float:left;
 		width:@_SmallW;
 		display:block;
+		padding:.25em;
+		margin:.25em;
 	}
 	.toggler{
 		position:relative;
@@ -582,12 +598,6 @@ span, input{
 	width:50%;
 }
 
-#theWorld{
-	position:relative;
-	top:-2em;
-	left:-2em;
-	.transformSVG(.95);
-}
 
 .worldDiv{
 	background-color:@isWhite;
